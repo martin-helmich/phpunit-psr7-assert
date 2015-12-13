@@ -8,5 +8,8 @@
             "email": "m.helmich@mittwald.de"
         }
     ],
-    "require": {}
+    "require": {
+        "psr/http-message": "^1.0",
+        "phpunit/phpunit": ">=4.8"
+    }
 }
