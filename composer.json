@@ -11,5 +11,10 @@
     "require": {
         "psr/http-message": "^1.0",
         "phpunit/phpunit": ">=4.8"
+    },
+    "autoload": {
+        "psr-4": {
+            "Helmich\\Psr7Assert\\": "src/"
+        }
     }
 }
