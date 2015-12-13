@@ -3,6 +3,7 @@ namespace Helmich\Psr7Assert\Constraint;
 
 
 use PHPUnit_Framework_Constraint as Constraint;
+use PHPUnit_Framework_Assert as Assert;
 use Psr\Http\Message\MessageInterface;
 
 
@@ -26,11 +27,11 @@ class HasHeaderConstraint extends Constraint
 
         if ($constraint === NULL)
         {
-            $constraint = new \PHPUnit_Framework_Constraint_Not(new \PHPUnit_Framework_Constraint_IsEmpty());
+            $constraint = Assert::logicalNot(Assert::isEmpty());
         }
         else if (!$constraint instanceof Constraint)
         {
-            $constraint = new \PHPUnit_Framework_Constraint_IsEqual($constraint);
+            $constraint = Assert::equalTo($constraint);
         }
 
         $this->name       = strtolower($name);
@@ -46,7 +47,7 @@ class HasHeaderConstraint extends Constraint
      */
     public function toString()
     {
-        return "has header '{$this->name}'";
+        return "has header '{$this->name}' that {$this->constraint->toString()}";
     }
 
 
@@ -70,6 +71,7 @@ class HasHeaderConstraint extends Constraint
                 return TRUE;
             }
         }
+
         return FALSE;
     }
 

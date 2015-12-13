@@ -67,13 +67,6 @@ trait Psr7Assertions
 
 
 
-    public static function hasHeaderMatching($name, Constraint $constraint)
-    {
-        return new HasHeaderConstraint($name, $constraint);
-    }
-
-
-
     public static function bodyMatches(Constraint $constraint)
     {
         return new BodyMatchesConstraint($constraint);
