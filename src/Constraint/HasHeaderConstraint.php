@@ -4,7 +4,6 @@ namespace Helmich\Psr7Assert\Constraint;
 
 use PHPUnit_Framework_Constraint as Constraint;
 use Psr\Http\Message\MessageInterface;
-use Psr\Http\Message\RequestInterface;
 
 
 class HasHeaderConstraint extends Constraint
