@@ -17,6 +17,11 @@ function hasHeader($name, $constraint = NULL)
     return new HasHeaderConstraint($name, $constraint);
 }
 
+function hasHeaders(array $constraints)
+{
+    return Psr7Assertions::hasHeaders($constraints);
+}
+
 function hasContentType($contentType)
 {
     return new HasHeaderConstraint('Content-Type', $contentType);

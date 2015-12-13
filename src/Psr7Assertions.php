@@ -33,6 +33,13 @@ trait Psr7Assertions
 
 
 
+    public static function assertMessageHasHeaders(MessageInterface $message, array $constraints)
+    {
+        Assert::assertThat($message, static::hasHeaders($constraints));
+    }
+
+
+
     public static function assertMessageBodyMatches(MessageInterface $message, $constraint)
     {
         Assert::assertThat($message, static::bodyMatches($constraint));
@@ -127,6 +134,22 @@ trait Psr7Assertions
     public static function hasHeader($name, $constraint = NULL)
     {
         return new HasHeaderConstraint($name, $constraint);
+    }
+
+
+
+    public static function hasHeaders(array $constraints)
+    {
+        $headerConstraints = [];
+        foreach ($constraints as $name => $constraint)
+        {
+            $headerConstraints[] = new HasHeaderConstraint($name, $constraint);
+        }
+
+        $c = Assert::logicalAnd();
+        $c->setConstraints($headerConstraints);
+
+        return $c;
     }
 
 

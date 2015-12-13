@@ -74,6 +74,20 @@ class ConstraintTest extends TestCase
 
 
 
+    public function testHasHeadersCanSucceedWithConstraint()
+    {
+        $request = new Request('GET', '/', ['x-foo' => 14, 'content-type' => 'text/plain']);
+        $this->assertMessageHasHeaders(
+            $request,
+            [
+                'X-Foo'        => Assert::greaterThanOrEqual(10),
+                'Content-Type' => 'text/plain',
+            ]
+        );
+    }
+
+
+
     /**
      * @expectedException \PHPUnit_Framework_AssertionFailedError
      */
@@ -121,9 +135,10 @@ class ConstraintTest extends TestCase
             ['POST'],
             ['PUT'],
             ['PATCH'],
-            ['DELETE']
+            ['DELETE'],
         ];
     }
+
 
 
     /**
