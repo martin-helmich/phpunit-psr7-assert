@@ -43,7 +43,7 @@ class HasUriConstraint extends Constraint
             return FALSE;
         }
 
-        return $this->uri == $other->getUri();
+        return $this->uri == $other->getUri()->__toString();
     }
 
 
