@@ -39,6 +39,13 @@ trait Psr7Assertions
 
 
 
+    public static function assertMessageBodyMatchesJson(MessageInterface $message, array $jsonConstraints)
+    {
+        Assert::assertThat($message, static::bodyMatchesJson($jsonConstraints));
+    }
+
+
+
     public static function hasUri($uri)
     {
         return new HasUriConstraint($uri);
@@ -78,7 +85,10 @@ trait Psr7Assertions
     {
         return Assert::logicalAnd(
             self::hasHeaderEqualTo('content-type', 'application/json'),
-            self::bodyMatches(new JsonValueMatchesMany($constraints))
+            self::bodyMatches(Assert::logicalAnd(
+                Assert::isJson(),
+                new JsonValueMatchesMany($constraints)
+            ))
         );
     }
 

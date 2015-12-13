@@ -2,12 +2,10 @@
 namespace Helmich\Psr7Assert\Tests\Functional;
 
 
+use GuzzleHttp\Psr7\Request;
 use Helmich\Psr7Assert\Psr7Assertions;
 use PHPUnit_Framework_Assert as Assert;
 use PHPUnit_Framework_TestCase as TestCase;
-use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\StreamInterface;
-use Psr\Http\Message\UriInterface;
 
 
 class ConstraintTest extends TestCase
@@ -21,13 +19,8 @@ class ConstraintTest extends TestCase
 
     public function testHasUriCanSucceed()
     {
-        $uri = $this->prophesize(UriInterface::class);
-        $uri->__toString()->willReturn('/foo');
-
-        $request = $this->prophesize(RequestInterface::class);
-        $request->getUri()->willReturn($uri);
-
-        $this->assertRequestHasUri($request->reveal(), '/foo');
+        $request = new Request('GET', '/foo');
+        $this->assertRequestHasUri($request, '/foo');
     }
 
 
@@ -37,20 +30,15 @@ class ConstraintTest extends TestCase
      */
     public function testHasUriCanFail()
     {
-        $uri = $this->prophesize(UriInterface::class);
-        $uri->__toString()->willReturn('/foo');
-
-        $request = $this->prophesize(RequestInterface::class);
-        $request->getUri()->willReturn($uri);
-
-        $this->assertRequestHasUri($request->reveal(), '/bar');
+        $request = new Request('GET', '/foo');
+        $this->assertRequestHasUri($request, '/bar');
     }
 
 
 
     public function testHasHeaderCanSucceedWithPrimitiveValue()
     {
-        $request = $this->buildRequestWithHeader('x-foo', 'bar');
+        $request = new Request('GET', '/', ['x-foo' => 'bar']);
         $this->assertMessageHasHeader($request, 'X-Foo', 'bar');
     }
 
@@ -61,7 +49,7 @@ class ConstraintTest extends TestCase
      */
     public function testHasHeaderCanFailWithPrimitiveValue()
     {
-        $request = $this->buildRequestWithHeader('x-foo', 'baz');
+        $request = new Request('GET', '/', ['x-foo' => 'baz']);
         $this->assertMessageHasHeader($request, 'X-Foo', 'bar');
     }
 
@@ -72,19 +60,15 @@ class ConstraintTest extends TestCase
      */
     public function testHasHeaderCanFailWithNonExistingHeader()
     {
-        $request = $this->prophesize(RequestInterface::class);
-        $request->getHeaders()->willReturn([]);
-        $request->getHeader('x-foo')->willReturn([]);
-        $request->hasHeader('x-foo')->willReturn(FALSE);
-
-        $this->assertMessageHasHeader($request->reveal(), 'X-Foo', 'bar');
+        $request = new Request('GET', '/', []);
+        $this->assertMessageHasHeader($request, 'X-Foo', 'bar');
     }
 
 
 
     public function testHasHeaderCanSucceedWithConstraint()
     {
-        $request = $this->buildRequestWithHeader('x-foo', 14);
+        $request = new Request('GET', '/', ['x-foo' => 14]);
         $this->assertMessageHasHeader($request, 'X-Foo', Assert::greaterThanOrEqual(10));
     }
 
@@ -95,7 +79,7 @@ class ConstraintTest extends TestCase
      */
     public function testHasHeaderCanFailWithConstraint()
     {
-        $request = $this->buildRequestWithHeader('x-foo', 4);
+        $request = new Request('GET', '/', ['x-foo' => 4]);
         $this->assertMessageHasHeader($request, 'X-Foo', Assert::greaterThanOrEqual(10));
     }
 
@@ -103,13 +87,8 @@ class ConstraintTest extends TestCase
 
     public function testBodyMatchesCanSucceed()
     {
-        $stream = $this->prophesize(StreamInterface::class);
-        $stream->getContents()->willReturn('foobar');
-
-        $request = $this->prophesize(RequestInterface::class);
-        $request->getBody()->willReturn($stream);
-
-        $this->assertMessageBodyMatches($request->reveal(), Assert::equalTo('foobar'));
+        $request = new Request('GET', '/', [], 'foobar');
+        $this->assertMessageBodyMatches($request, Assert::equalTo('foobar'));
     }
 
 
@@ -119,30 +98,18 @@ class ConstraintTest extends TestCase
      */
     public function testBodyMatchesCanFail()
     {
-        $stream = $this->prophesize(StreamInterface::class);
-        $stream->getContents()->willReturn('foobar');
-
-        $request = $this->prophesize(RequestInterface::class);
-        $request->getBody()->willReturn($stream);
-
-        $this->assertMessageBodyMatches($request->reveal(), Assert::equalTo('barbaz'));
+        $request = new Request('GET', '/', [], 'foobar');
+        $this->assertMessageBodyMatches($request, Assert::equalTo('barbaz'));
     }
 
 
 
-    /**
-     * @param $name
-     * @param $value
-     * @return RequestInterface
-     */
-    private function buildRequestWithHeader($name, $value)
+    public function testBodyMatchesJsonCanSucceed()
     {
-        $request = $this->prophesize(RequestInterface::class);
-        $request->getHeaders()->willReturn([$name => [$value]]);
-        $request->getHeader($name)->willReturn([$value]);
-        $request->hasHeader($name)->willReturn(TRUE);
-        return $request->reveal();
+        $request = new Request('GET', '/foo', ['content-type' => 'application/json'], json_encode(['foo' => 'bar']));
+        $this->assertMessageBodyMatchesJson($request, array('$.foo' => 'bar'));
     }
+
 
 
 }

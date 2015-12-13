@@ -30,6 +30,9 @@ function bodyMatchesJson($constraints)
 {
     return Assert::logicalAnd(
         hasContentType('application/json'),
-        bodyMatches(new JsonValueMatchesMany($constraints))
+        bodyMatches(Assert::logicalAnd(
+            Assert::isJson(),
+            new JsonValueMatchesMany($constraints)
+        ))
     );
 }

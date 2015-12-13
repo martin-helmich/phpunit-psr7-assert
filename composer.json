@@ -11,7 +11,10 @@
     "require": {
         "psr/http-message": "^1.0",
         "phpunit/phpunit": ">=4.8",
-        "helmich/phpunit-json-assert": "*"
+        "helmich/phpunit-json-assert": "^1.0"
+    },
+    "require-dev": {
+        "guzzlehttp/psr7": "^1.2"
     },
     "autoload": {
         "psr-4": {
