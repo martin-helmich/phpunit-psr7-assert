@@ -1,0 +1,12 @@
+{
+    "name": "helmich/phpunit-psr7-assert",
+    "description": "PHPUnit assertions for testing PSR7-compliant applications",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Martin Helmich",
+            "email": "m.helmich@mittwald.de"
+        }
+    ],
+    "require": {}
+}
