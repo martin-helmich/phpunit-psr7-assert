@@ -4,6 +4,7 @@ use Helmich\JsonAssert\Constraint\JsonValueMatchesMany;
 use Helmich\Psr7Assert\Constraint\BodyMatchesConstraint;
 use Helmich\Psr7Assert\Constraint\HasHeaderConstraint;
 use Helmich\Psr7Assert\Constraint\HasUriConstraint;
+use Helmich\Psr7Assert\Psr7Assertions;
 use PHPUnit_Framework_Assert as Assert;
 
 function hasUri($uri)
@@ -21,6 +22,31 @@ function hasContentType($contentType)
     return new HasHeaderConstraint('Content-Type', $contentType);
 }
 
+function hasMethod($method)
+{
+    return Psr7Assertions::hasMethod($method);
+}
+
+function isGet()
+{
+    return Psr7Assertions::isGet();
+}
+
+function isPost()
+{
+    return Psr7Assertions::isPost();
+}
+
+function isPut()
+{
+    return Psr7Assertions::isPut();
+}
+
+function isDelete()
+{
+    return Psr7Assertions::isDelete();
+}
+
 function bodyMatches($constraint)
 {
     return new BodyMatchesConstraint($constraint);
@@ -30,9 +56,11 @@ function bodyMatchesJson($constraints)
 {
     return Assert::logicalAnd(
         hasContentType('application/json'),
-        bodyMatches(Assert::logicalAnd(
-            Assert::isJson(),
-            new JsonValueMatchesMany($constraints)
-        ))
+        bodyMatches(
+            Assert::logicalAnd(
+                Assert::isJson(),
+                new JsonValueMatchesMany($constraints)
+            )
+        )
     );
 }

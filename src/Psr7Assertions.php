@@ -5,6 +5,7 @@ namespace Helmich\Psr7Assert;
 use Helmich\JsonAssert\Constraint\JsonValueMatchesMany;
 use Helmich\Psr7Assert\Constraint\BodyMatchesConstraint;
 use Helmich\Psr7Assert\Constraint\HasHeaderConstraint;
+use Helmich\Psr7Assert\Constraint\HasMethodConstraint;
 use Helmich\Psr7Assert\Constraint\HasUriConstraint;
 use PHPUnit_Framework_Assert as Assert;
 use PHPUnit_Framework_Constraint as Constraint;
@@ -46,9 +47,79 @@ trait Psr7Assertions
 
 
 
+    public static function assertRequestHasMethod(RequestInterface $request, $method)
+    {
+        Assert::assertThat($request, static::hasMethod($method));
+    }
+
+
+
+    public static function assertRequestIsGet(RequestInterface $request)
+    {
+        Assert::assertThat($request, static::isGet());
+    }
+
+
+
+    public static function assertRequestIsPost(RequestInterface $request)
+    {
+        Assert::assertThat($request, static::isPost());
+    }
+
+
+
+    public static function assertRequestIsPut(RequestInterface $request)
+    {
+        Assert::assertThat($request, static::isPut());
+    }
+
+
+
+    public static function assertRequestIsDelete(RequestInterface $request)
+    {
+        Assert::assertThat($request, static::isDelete());
+    }
+
+
+
     public static function hasUri($uri)
     {
         return new HasUriConstraint($uri);
+    }
+
+
+
+    public static function hasMethod($method)
+    {
+        return new HasMethodConstraint($method);
+    }
+
+
+
+    public static function isGet()
+    {
+        return static::hasMethod('GET');
+    }
+
+
+
+    public static function isPost()
+    {
+        return static::hasMethod('POST');
+    }
+
+
+
+    public static function isPut()
+    {
+        return static::hasMethod('PUT');
+    }
+
+
+
+    public static function isDelete()
+    {
+        return static::hasMethod('DELETE');
     }
 
 
@@ -78,10 +149,12 @@ trait Psr7Assertions
     {
         return Assert::logicalAnd(
             self::hasHeaderEqualTo('content-type', 'application/json'),
-            self::bodyMatches(Assert::logicalAnd(
-                Assert::isJson(),
-                new JsonValueMatchesMany($constraints)
-            ))
+            self::bodyMatches(
+                Assert::logicalAnd(
+                    Assert::isJson(),
+                    new JsonValueMatchesMany($constraints)
+                )
+            )
         );
     }
 

@@ -112,4 +112,97 @@ class ConstraintTest extends TestCase
 
 
 
+    public function dataForRequestMethods()
+    {
+        return [
+            ['GET'],
+            ['HEAD'],
+            ['OPTIONS'],
+            ['POST'],
+            ['PUT'],
+            ['PATCH'],
+            ['DELETE']
+        ];
+    }
+
+
+    /**
+     * @param $method
+     * @dataProvider dataForRequestMethods
+     */
+    public function testAssertRequestHasMethodCanSucceed($method)
+    {
+        $this->assertRequestHasMethod(new Request($method, '/'), $method);
+    }
+
+
+
+    public function testIsGetCanSucceed()
+    {
+        $this->assertRequestIsGet(new Request('GET', '/'));
+    }
+
+
+
+    /**
+     * @expectedException \PHPUnit_Framework_AssertionFailedError
+     */
+    public function testIsGetCanFail()
+    {
+        $this->assertRequestIsGet(new Request('POST', '/'));
+    }
+
+
+
+    public function testIsPostCanSucceed()
+    {
+        $this->assertRequestIsPost(new Request('POST', '/'));
+    }
+
+
+
+    /**
+     * @expectedException \PHPUnit_Framework_AssertionFailedError
+     */
+    public function testIsPostCanFail()
+    {
+        $this->assertRequestIsPost(new Request('GET', '/'));
+    }
+
+
+
+    public function testIsPutCanSucceed()
+    {
+        $this->assertRequestIsPut(new Request('PUT', '/'));
+    }
+
+
+
+    /**
+     * @expectedException \PHPUnit_Framework_AssertionFailedError
+     */
+    public function testIsPutCanFail()
+    {
+        $this->assertRequestIsPut(new Request('GET', '/'));
+    }
+
+
+
+    public function testIsDeleteCanSucceed()
+    {
+        $this->assertRequestIsDelete(new Request('DELETE', '/'));
+    }
+
+
+
+    /**
+     * @expectedException \PHPUnit_Framework_AssertionFailedError
+     */
+    public function testIsDeleteCanFail()
+    {
+        $this->assertRequestIsDelete(new Request('POST', '/'));
+    }
+
+
+
 }
