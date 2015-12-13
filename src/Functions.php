@@ -1,5 +1,6 @@
 <?php
 
+use Helmich\Psr7Assert\Constraint\BodyMatchesConstraint;
 use Helmich\Psr7Assert\Constraint\HasHeaderConstraint;
 use Helmich\Psr7Assert\Constraint\HasUriConstraint;
 
@@ -16,4 +17,9 @@ function hasHeader($name, $constraint = NULL)
 function hasContentType($contentType)
 {
     return new HasHeaderConstraint('Content-Type', $contentType);
+}
+
+function bodyMatches($constraint)
+{
+    return new BodyMatchesConstraint($constraint);
 }
