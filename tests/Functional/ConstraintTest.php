@@ -50,8 +50,8 @@ class ConstraintTest extends TestCase
     public function testHasHeaderCanSucceedWithPrimitiveValue()
     {
         $request = $this->prophesize(RequestInterface::class);
-        $request->getHeaders()->willReturn(['x-foo' => 'bar']);
-        $request->getHeader('x-foo')->willReturn('bar');
+        $request->getHeaders()->willReturn(['x-foo' => ['bar']]);
+        $request->getHeader('x-foo')->willReturn(['bar']);
         $request->hasHeader('x-foo')->willReturn(TRUE);
 
         $this->assertMessageHasHeader($request->reveal(), 'X-Foo', 'bar');
@@ -65,8 +65,8 @@ class ConstraintTest extends TestCase
     public function testHasHeaderCanFailWithPrimitiveValue()
     {
         $request = $this->prophesize(RequestInterface::class);
-        $request->getHeaders()->willReturn(['x-foo' => 'baz']);
-        $request->getHeader('x-foo')->willReturn('baz');
+        $request->getHeaders()->willReturn(['x-foo' => ['baz']]);
+        $request->getHeader('x-foo')->willReturn(['baz']);
         $request->hasHeader('x-foo')->willReturn(TRUE);
 
         $this->assertMessageHasHeader($request->reveal(), 'X-Foo', 'bar');
@@ -81,7 +81,7 @@ class ConstraintTest extends TestCase
     {
         $request = $this->prophesize(RequestInterface::class);
         $request->getHeaders()->willReturn([]);
-        $request->getHeader('x-foo')->willReturn(NULL);
+        $request->getHeader('x-foo')->willReturn([]);
         $request->hasHeader('x-foo')->willReturn(FALSE);
 
         $this->assertMessageHasHeader($request->reveal(), 'X-Foo', 'bar');
@@ -92,8 +92,8 @@ class ConstraintTest extends TestCase
     public function testHasHeaderCanSucceedWithConstraint()
     {
         $request = $this->prophesize(RequestInterface::class);
-        $request->getHeaders()->willReturn(['x-foo' => 14]);
-        $request->getHeader('x-foo')->willReturn(14);
+        $request->getHeaders()->willReturn(['x-foo' => [14]]);
+        $request->getHeader('x-foo')->willReturn([14]);
         $request->hasHeader('x-foo')->willReturn(TRUE);
 
         $this->assertMessageHasHeader($request->reveal(), 'X-Foo', Assert::greaterThanOrEqual(10));
@@ -107,8 +107,8 @@ class ConstraintTest extends TestCase
     public function testHasHeaderCanFailWithConstraint()
     {
         $request = $this->prophesize(RequestInterface::class);
-        $request->getHeaders()->willReturn(['x-foo' => 4]);
-        $request->getHeader('x-foo')->willReturn(4);
+        $request->getHeaders()->willReturn(['x-foo' => [4]]);
+        $request->getHeader('x-foo')->willReturn([4]);
         $request->hasHeader('x-foo')->willReturn(TRUE);
 
         $this->assertMessageHasHeader($request->reveal(), 'X-Foo', Assert::greaterThanOrEqual(10));

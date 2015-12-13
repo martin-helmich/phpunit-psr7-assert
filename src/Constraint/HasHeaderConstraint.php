@@ -59,12 +59,19 @@ class HasHeaderConstraint extends Constraint
             return FALSE;
         }
 
-        if (!$other->hasHeader($this->name)) {
+        if (!$other->hasHeader($this->name))
+        {
             return FALSE;
         }
 
-        $value = $other->getHeader($this->name);
-        return $this->constraint->evaluate($value, '', TRUE);
+        foreach ($other->getHeader($this->name) as $value)
+        {
+            if ($this->constraint->evaluate($value, '', TRUE))
+            {
+                return TRUE;
+            }
+        }
+        return FALSE;
     }
 
 
