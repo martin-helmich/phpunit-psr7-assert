@@ -6,6 +6,7 @@ use Helmich\Psr7Assert\Psr7Assertions;
 use PHPUnit_Framework_Assert as Assert;
 use PHPUnit_Framework_TestCase as TestCase;
 use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\UriInterface;
 
 
@@ -96,6 +97,35 @@ class ConstraintTest extends TestCase
     {
         $request = $this->buildRequestWithHeader('x-foo', 4);
         $this->assertMessageHasHeader($request, 'X-Foo', Assert::greaterThanOrEqual(10));
+    }
+
+
+
+    public function testBodyMatchesCanSucceed()
+    {
+        $stream = $this->prophesize(StreamInterface::class);
+        $stream->getContents()->willReturn('foobar');
+
+        $request = $this->prophesize(RequestInterface::class);
+        $request->getBody()->willReturn($stream);
+
+        $this->assertMessageBodyMatches($request->reveal(), Assert::equalTo('foobar'));
+    }
+
+
+
+    /**
+     * @expectedException \PHPUnit_Framework_AssertionFailedError
+     */
+    public function testBodyMatchesCanFail()
+    {
+        $stream = $this->prophesize(StreamInterface::class);
+        $stream->getContents()->willReturn('foobar');
+
+        $request = $this->prophesize(RequestInterface::class);
+        $request->getBody()->willReturn($stream);
+
+        $this->assertMessageBodyMatches($request->reveal(), Assert::equalTo('barbaz'));
     }
 
 

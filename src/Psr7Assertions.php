@@ -2,6 +2,7 @@
 namespace Helmich\Psr7Assert;
 
 
+use Helmich\Psr7Assert\Constraint\BodyMatchesConstraint;
 use Helmich\Psr7Assert\Constraint\HasHeaderConstraint;
 use Helmich\Psr7Assert\Constraint\HasUriConstraint;
 use PHPUnit_Framework_Assert as Assert;
@@ -30,6 +31,13 @@ trait Psr7Assertions
 
 
 
+    public static function assertMessageBodyMatches(MessageInterface $message, $constraint)
+    {
+        Assert::assertThat($message, static::bodyMatches($constraint));
+    }
+
+
+
     public static function hasUri($uri)
     {
         return new HasUriConstraint($uri);
@@ -54,6 +62,13 @@ trait Psr7Assertions
     public static function hasHeaderMatching($name, Constraint $constraint)
     {
         return new HasHeaderConstraint($name, $constraint);
+    }
+
+
+
+    public static function bodyMatches(Constraint $constraint)
+    {
+        return new BodyMatchesConstraint($constraint);
     }
 
 
