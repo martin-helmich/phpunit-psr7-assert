@@ -31,7 +31,7 @@ class HasMethodConstraint extends Constraint
      */
     public function toString()
     {
-        return "has request methdo {$this->method}";
+        return "has request method {$this->method}";
     }
 
 
