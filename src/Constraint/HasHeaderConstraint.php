@@ -34,7 +34,7 @@ class HasHeaderConstraint extends Constraint
             $constraint = new \PHPUnit_Framework_Constraint_IsEqual($constraint);
         }
 
-        $this->name       = $name;
+        $this->name       = strtolower($name);
         $this->constraint = $constraint;
     }
 
