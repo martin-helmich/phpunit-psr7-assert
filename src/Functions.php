@@ -1,8 +1,10 @@
 <?php
 
+use Helmich\JsonAssert\Constraint\JsonValueMatchesMany;
 use Helmich\Psr7Assert\Constraint\BodyMatchesConstraint;
 use Helmich\Psr7Assert\Constraint\HasHeaderConstraint;
 use Helmich\Psr7Assert\Constraint\HasUriConstraint;
+use PHPUnit_Framework_Assert as Assert;
 
 function hasUri($uri)
 {
@@ -22,4 +24,12 @@ function hasContentType($contentType)
 function bodyMatches($constraint)
 {
     return new BodyMatchesConstraint($constraint);
+}
+
+function bodyMatchesJson($constraints)
+{
+    return Assert::logicalAnd(
+        hasContentType('application/json'),
+        bodyMatches(new JsonValueMatchesMany($constraints))
+    );
 }

@@ -2,6 +2,7 @@
 namespace Helmich\Psr7Assert;
 
 
+use Helmich\JsonAssert\Constraint\JsonValueMatchesMany;
 use Helmich\Psr7Assert\Constraint\BodyMatchesConstraint;
 use Helmich\Psr7Assert\Constraint\HasHeaderConstraint;
 use Helmich\Psr7Assert\Constraint\HasUriConstraint;
@@ -69,6 +70,16 @@ trait Psr7Assertions
     public static function bodyMatches(Constraint $constraint)
     {
         return new BodyMatchesConstraint($constraint);
+    }
+
+
+
+    public static function bodyMatchesJson(array $constraints)
+    {
+        return Assert::logicalAnd(
+            self::hasHeaderEqualTo('content-type', 'application/json'),
+            self::bodyMatches(new JsonValueMatchesMany($constraints))
+        );
     }
 
 
