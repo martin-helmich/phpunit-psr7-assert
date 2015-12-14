@@ -11,7 +11,6 @@ class HasHeaderConstraintTest extends TestCase
 {
 
 
-
     public function dataForHeaderValues()
     {
         return [
@@ -19,7 +18,6 @@ class HasHeaderConstraintTest extends TestCase
             [1234],
         ];
     }
-
 
 
     /**
@@ -35,7 +33,6 @@ class HasHeaderConstraintTest extends TestCase
     }
 
 
-
     /**
      * @expectedException \PHPUnit_Framework_AssertionFailedError
      */
@@ -48,7 +45,6 @@ class HasHeaderConstraintTest extends TestCase
     }
 
 
-
     /**
      * @expectedException \PHPUnit_Framework_AssertionFailedError
      */
@@ -59,7 +55,6 @@ class HasHeaderConstraintTest extends TestCase
         $constraint = new HasHeaderConstraint('x-foo');
         $constraint->evaluate($request);
     }
-
 
 
     /**
@@ -75,16 +70,14 @@ class HasHeaderConstraintTest extends TestCase
     }
 
 
-
     public function testComplexConstraintsAreMatchedOnEachHeader()
     {
         $request = new Request('POST', '/', ['x-foo' => ['foo', 'bar']]);
-        $inner = self::equalTo('foo');
+        $inner   = self::equalTo('foo');
 
         $constraint = new HasHeaderConstraint('x-foo', $inner);
         $constraint->evaluate($request);
     }
-
 
 
     /**
@@ -93,12 +86,11 @@ class HasHeaderConstraintTest extends TestCase
     public function testComplexConstraintsAreMatchedOnEachHeaderAndCanFail()
     {
         $request = new Request('POST', '/', ['x-foo' => ['foo', 'bar']]);
-        $inner = self::equalTo('baz');
+        $inner   = self::equalTo('baz');
 
         $constraint = new HasHeaderConstraint('x-foo', $inner);
         $constraint->evaluate($request);
     }
-
 
 
     /**

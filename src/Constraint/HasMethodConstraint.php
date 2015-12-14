@@ -10,10 +10,8 @@ class HasMethodConstraint extends Constraint
 {
 
 
-
     /** @var string */
     private $method;
-
 
 
     public function __construct($method)
@@ -21,7 +19,6 @@ class HasMethodConstraint extends Constraint
         parent::__construct();
         $this->method = $method;
     }
-
 
 
     /**
@@ -35,17 +32,14 @@ class HasMethodConstraint extends Constraint
     }
 
 
-
     protected function matches($other)
     {
-        if (!$other instanceof RequestInterface)
-        {
-            return FALSE;
+        if (!$other instanceof RequestInterface) {
+            return false;
         }
 
         return $other->getMethod() === $this->method;
     }
-
 
 
 }

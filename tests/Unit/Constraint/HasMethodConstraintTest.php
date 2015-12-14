@@ -3,15 +3,12 @@ namespace Helmich\Psr7Assert\Tests\Unit\Constraint;
 
 
 use GuzzleHttp\Psr7\Request;
-use Helmich\Psr7Assert\Constraint\HasHeaderConstraint;
 use Helmich\Psr7Assert\Constraint\HasMethodConstraint;
-use Helmich\Psr7Assert\Constraint\HasUriConstraint;
 use PHPUnit_Framework_TestCase as TestCase;
 
 
 class HasMethodConstraintTest extends TestCase
 {
-
 
 
     public function testMethodIsEvaluatedForEquality()
@@ -21,7 +18,6 @@ class HasMethodConstraintTest extends TestCase
         $constraint = new HasMethodConstraint('GET');
         $constraint->evaluate($request);
     }
-
 
 
     /**

@@ -2,14 +2,13 @@
 namespace Helmich\Psr7Assert\Constraint;
 
 
-use PHPUnit_Framework_Constraint as Constraint;
 use PHPUnit_Framework_Assert as Assert;
+use PHPUnit_Framework_Constraint as Constraint;
 use Psr\Http\Message\MessageInterface;
 
 
 class HasHeaderConstraint extends Constraint
 {
-
 
 
     /** @var string */
@@ -20,24 +19,19 @@ class HasHeaderConstraint extends Constraint
     private $constraint;
 
 
-
-    public function __construct($name, $constraint = NULL)
+    public function __construct($name, $constraint = null)
     {
         parent::__construct();
 
-        if ($constraint === NULL)
-        {
+        if ($constraint === null) {
             $constraint = Assert::logicalNot(Assert::isEmpty());
-        }
-        else if (!$constraint instanceof Constraint)
-        {
+        } else if (!$constraint instanceof Constraint) {
             $constraint = Assert::equalTo($constraint);
         }
 
         $this->name       = strtolower($name);
         $this->constraint = $constraint;
     }
-
 
 
     /**
@@ -51,30 +45,24 @@ class HasHeaderConstraint extends Constraint
     }
 
 
-
     protected function matches($other)
     {
-        if (!$other instanceof MessageInterface)
-        {
-            return FALSE;
+        if (!$other instanceof MessageInterface) {
+            return false;
         }
 
-        if (!$other->hasHeader($this->name))
-        {
-            return FALSE;
+        if (!$other->hasHeader($this->name)) {
+            return false;
         }
 
-        foreach ($other->getHeader($this->name) as $value)
-        {
-            if ($this->constraint->evaluate($value, '', TRUE))
-            {
-                return TRUE;
+        foreach ($other->getHeader($this->name) as $value) {
+            if ($this->constraint->evaluate($value, '', true)) {
+                return true;
             }
         }
 
-        return FALSE;
+        return false;
     }
-
 
 
 }

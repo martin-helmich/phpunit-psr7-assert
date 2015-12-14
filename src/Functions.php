@@ -12,7 +12,7 @@ function hasUri($uri)
     return new HasUriConstraint($uri);
 }
 
-function hasHeader($name, $constraint = NULL)
+function hasHeader($name, $constraint = null)
 {
     return new HasHeaderConstraint($name, $constraint);
 }

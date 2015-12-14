@@ -10,10 +10,8 @@ class BodyMatchesConstraint extends Constraint
 {
 
 
-
     /** @var Constraint */
     private $constraint;
-
 
 
     public function __construct($constraint)
@@ -21,7 +19,6 @@ class BodyMatchesConstraint extends Constraint
         parent::__construct();
         $this->constraint = $constraint;
     }
-
 
 
     /**
@@ -35,18 +32,15 @@ class BodyMatchesConstraint extends Constraint
     }
 
 
-
     protected function matches($other)
     {
-        if (!$other instanceof MessageInterface)
-        {
-            return FALSE;
+        if (!$other instanceof MessageInterface) {
+            return false;
         }
 
         $body = $other->getBody()->getContents();
-        return $this->constraint->evaluate($body, '', TRUE);
+        return $this->constraint->evaluate($body, '', true);
     }
-
 
 
 }

@@ -12,9 +12,7 @@ class ConstraintTest extends TestCase
 {
 
 
-
     use Psr7Assertions;
-
 
 
     public function testHasUriCanSucceed()
@@ -22,7 +20,6 @@ class ConstraintTest extends TestCase
         $request = new Request('GET', '/foo');
         $this->assertRequestHasUri($request, '/foo');
     }
-
 
 
     /**
@@ -35,13 +32,11 @@ class ConstraintTest extends TestCase
     }
 
 
-
     public function testHasHeaderCanSucceedWithPrimitiveValue()
     {
         $request = new Request('GET', '/', ['x-foo' => 'bar']);
         $this->assertMessageHasHeader($request, 'X-Foo', 'bar');
     }
-
 
 
     /**
@@ -54,7 +49,6 @@ class ConstraintTest extends TestCase
     }
 
 
-
     /**
      * @expectedException \PHPUnit_Framework_AssertionFailedError
      */
@@ -65,13 +59,11 @@ class ConstraintTest extends TestCase
     }
 
 
-
     public function testHasHeaderCanSucceedWithConstraint()
     {
         $request = new Request('GET', '/', ['x-foo' => 14]);
         $this->assertMessageHasHeader($request, 'X-Foo', Assert::greaterThanOrEqual(10));
     }
-
 
 
     public function testHasHeadersCanSucceedWithConstraint()
@@ -80,12 +72,11 @@ class ConstraintTest extends TestCase
         $this->assertMessageHasHeaders(
             $request,
             [
-                'X-Foo'        => Assert::greaterThanOrEqual(10),
+                'X-Foo' => Assert::greaterThanOrEqual(10),
                 'Content-Type' => 'text/plain',
             ]
         );
     }
-
 
 
     /**
@@ -98,13 +89,11 @@ class ConstraintTest extends TestCase
     }
 
 
-
     public function testBodyMatchesCanSucceed()
     {
         $request = new Request('GET', '/', [], 'foobar');
         $this->assertMessageBodyMatches($request, Assert::equalTo('foobar'));
     }
-
 
 
     /**
@@ -117,13 +106,11 @@ class ConstraintTest extends TestCase
     }
 
 
-
     public function testBodyMatchesJsonCanSucceed()
     {
         $request = new Request('GET', '/foo', ['content-type' => 'application/json'], json_encode(['foo' => 'bar']));
         $this->assertMessageBodyMatchesJson($request, array('$.foo' => 'bar'));
     }
-
 
 
     public function dataForRequestMethods()
@@ -140,7 +127,6 @@ class ConstraintTest extends TestCase
     }
 
 
-
     /**
      * @param $method
      * @dataProvider dataForRequestMethods
@@ -151,12 +137,10 @@ class ConstraintTest extends TestCase
     }
 
 
-
     public function testIsGetCanSucceed()
     {
         $this->assertRequestIsGet(new Request('GET', '/'));
     }
-
 
 
     /**
@@ -168,12 +152,10 @@ class ConstraintTest extends TestCase
     }
 
 
-
     public function testIsPostCanSucceed()
     {
         $this->assertRequestIsPost(new Request('POST', '/'));
     }
-
 
 
     /**
@@ -185,12 +167,10 @@ class ConstraintTest extends TestCase
     }
 
 
-
     public function testIsPutCanSucceed()
     {
         $this->assertRequestIsPut(new Request('PUT', '/'));
     }
-
 
 
     /**
@@ -202,12 +182,10 @@ class ConstraintTest extends TestCase
     }
 
 
-
     public function testIsDeleteCanSucceed()
     {
         $this->assertRequestIsDelete(new Request('DELETE', '/'));
     }
-
 
 
     /**
@@ -217,7 +195,6 @@ class ConstraintTest extends TestCase
     {
         $this->assertRequestIsDelete(new Request('POST', '/'));
     }
-
 
 
 }

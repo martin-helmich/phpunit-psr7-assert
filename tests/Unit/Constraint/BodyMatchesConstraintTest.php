@@ -11,16 +11,14 @@ class BodyMatchesConstraintTest extends TestCase
 {
 
 
-
     public function dataForBadTypes()
     {
         return [
             ['foo'],
-            [FALSE],
+            [false],
             [[1, 2, 3]],
         ];
     }
-
 
 
     /**
@@ -32,21 +30,19 @@ class BodyMatchesConstraintTest extends TestCase
         $inner = $this->prophesize('PHPUnit_Framework_Constraint');
 
         $constraint = new BodyMatchesConstraint($inner->reveal());
-        self::assertThat($constraint->evaluate($var, '', TRUE), self::isFalse());
+        self::assertThat($constraint->evaluate($var, '', true), self::isFalse());
     }
-
 
 
     public function dataForInnerConstraintIsEvaluatedWithMessageContent()
     {
         return [
-            [uniqid(), TRUE],
-            [uniqid(), FALSE],
-            ['', TRUE],
-            ['', FALSE],
+            [uniqid(), true],
+            [uniqid(), false],
+            ['', true],
+            ['', false],
         ];
     }
-
 
 
     /**
@@ -59,10 +55,10 @@ class BodyMatchesConstraintTest extends TestCase
         $request = new Request('POST', '/', [], $body);
 
         $inner = $this->prophesize('PHPUnit_Framework_Constraint');
-        $inner->evaluate($body, '', TRUE)->shouldBeCalled()->willReturn($matches);
+        $inner->evaluate($body, '', true)->shouldBeCalled()->willReturn($matches);
 
         $constraint = new BodyMatchesConstraint($inner->reveal());
-        self::assertThat($constraint->evaluate($request, '', TRUE), self::equalTo($matches));
+        self::assertThat($constraint->evaluate($request, '', true), self::equalTo($matches));
     }
 
 }

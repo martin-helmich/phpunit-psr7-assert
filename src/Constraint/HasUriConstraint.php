@@ -10,10 +10,8 @@ class HasUriConstraint extends Constraint
 {
 
 
-
     /** @var string */
     private $uri;
-
 
 
     public function __construct($uri)
@@ -21,7 +19,6 @@ class HasUriConstraint extends Constraint
         parent::__construct();
         $this->uri = $uri;
     }
-
 
 
     /**
@@ -35,17 +32,14 @@ class HasUriConstraint extends Constraint
     }
 
 
-
     protected function matches($other)
     {
-        if (!$other instanceof RequestInterface)
-        {
-            return FALSE;
+        if (!$other instanceof RequestInterface) {
+            return false;
         }
 
         return $this->uri == $other->getUri()->__toString();
     }
-
 
 
 }
