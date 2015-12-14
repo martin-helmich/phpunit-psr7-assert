@@ -1,15 +1,12 @@
 <?php
 namespace Helmich\Psr7Assert\Tests\Unit\Constraint;
 
-
 use GuzzleHttp\Psr7\Request;
 use Helmich\Psr7Assert\Constraint\HasHeaderConstraint;
 use PHPUnit_Framework_TestCase as TestCase;
 
-
 class HasHeaderConstraintTest extends TestCase
 {
-
 
     public function dataForHeaderValues()
     {
@@ -18,7 +15,6 @@ class HasHeaderConstraintTest extends TestCase
             [1234],
         ];
     }
-
 
     /**
      * @param $header
@@ -32,7 +28,6 @@ class HasHeaderConstraintTest extends TestCase
         $constraint->evaluate($request);
     }
 
-
     /**
      * @expectedException \PHPUnit_Framework_AssertionFailedError
      */
@@ -44,7 +39,6 @@ class HasHeaderConstraintTest extends TestCase
         $constraint->evaluate($request);
     }
 
-
     /**
      * @expectedException \PHPUnit_Framework_AssertionFailedError
      */
@@ -55,7 +49,6 @@ class HasHeaderConstraintTest extends TestCase
         $constraint = new HasHeaderConstraint('x-foo');
         $constraint->evaluate($request);
     }
-
 
     /**
      * @param $header
@@ -69,7 +62,6 @@ class HasHeaderConstraintTest extends TestCase
         $constraint->evaluate($request);
     }
 
-
     public function testComplexConstraintsAreMatchedOnEachHeader()
     {
         $request = new Request('POST', '/', ['x-foo' => ['foo', 'bar']]);
@@ -78,7 +70,6 @@ class HasHeaderConstraintTest extends TestCase
         $constraint = new HasHeaderConstraint('x-foo', $inner);
         $constraint->evaluate($request);
     }
-
 
     /**
      * @expectedException \PHPUnit_Framework_AssertionFailedError
@@ -91,7 +82,6 @@ class HasHeaderConstraintTest extends TestCase
         $constraint = new HasHeaderConstraint('x-foo', $inner);
         $constraint->evaluate($request);
     }
-
 
     /**
      * @expectedException \PHPUnit_Framework_AssertionFailedError

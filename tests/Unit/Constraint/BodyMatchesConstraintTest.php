@@ -1,15 +1,12 @@
 <?php
 namespace Helmich\Psr7Assert\Tests\Unit\Constraint;
 
-
 use GuzzleHttp\Psr7\Request;
 use Helmich\Psr7Assert\Constraint\BodyMatchesConstraint;
 use PHPUnit_Framework_TestCase as TestCase;
 
-
 class BodyMatchesConstraintTest extends TestCase
 {
-
 
     public function dataForBadTypes()
     {
@@ -19,7 +16,6 @@ class BodyMatchesConstraintTest extends TestCase
             [[1, 2, 3]],
         ];
     }
-
 
     /**
      * @param $var
@@ -33,7 +29,6 @@ class BodyMatchesConstraintTest extends TestCase
         self::assertThat($constraint->evaluate($var, '', true), self::isFalse());
     }
 
-
     public function dataForInnerConstraintIsEvaluatedWithMessageContent()
     {
         return [
@@ -43,7 +38,6 @@ class BodyMatchesConstraintTest extends TestCase
             ['', false],
         ];
     }
-
 
     /**
      * @param $body

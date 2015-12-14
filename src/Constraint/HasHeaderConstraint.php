@@ -1,23 +1,18 @@
 <?php
 namespace Helmich\Psr7Assert\Constraint;
 
-
 use PHPUnit_Framework_Assert as Assert;
 use PHPUnit_Framework_Constraint as Constraint;
 use Psr\Http\Message\MessageInterface;
 
-
 class HasHeaderConstraint extends Constraint
 {
-
 
     /** @var string */
     private $name;
 
-
     /** @var Constraint */
     private $constraint;
-
 
     public function __construct($name, $constraint = null)
     {
@@ -25,14 +20,13 @@ class HasHeaderConstraint extends Constraint
 
         if ($constraint === null) {
             $constraint = Assert::logicalNot(Assert::isEmpty());
-        } else if (!$constraint instanceof Constraint) {
+        } elseif (!$constraint instanceof Constraint) {
             $constraint = Assert::equalTo($constraint);
         }
 
         $this->name       = strtolower($name);
         $this->constraint = $constraint;
     }
-
 
     /**
      * Returns a string representation of the object.
@@ -43,7 +37,6 @@ class HasHeaderConstraint extends Constraint
     {
         return "has header '{$this->name}' that {$this->constraint->toString()}";
     }
-
 
     protected function matches($other)
     {
@@ -63,6 +56,4 @@ class HasHeaderConstraint extends Constraint
 
         return false;
     }
-
-
 }

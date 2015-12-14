@@ -1,26 +1,21 @@
 <?php
 namespace Helmich\Psr7Assert\Tests\Functional;
 
-
 use GuzzleHttp\Psr7\Request;
 use Helmich\Psr7Assert\Psr7Assertions;
 use PHPUnit_Framework_Assert as Assert;
 use PHPUnit_Framework_TestCase as TestCase;
 
-
 class ConstraintTest extends TestCase
 {
 
-
     use Psr7Assertions;
-
 
     public function testHasUriCanSucceed()
     {
         $request = new Request('GET', '/foo');
         $this->assertRequestHasUri($request, '/foo');
     }
-
 
     /**
      * @expectedException \PHPUnit_Framework_AssertionFailedError
@@ -31,13 +26,11 @@ class ConstraintTest extends TestCase
         $this->assertRequestHasUri($request, '/bar');
     }
 
-
     public function testHasHeaderCanSucceedWithPrimitiveValue()
     {
         $request = new Request('GET', '/', ['x-foo' => 'bar']);
         $this->assertMessageHasHeader($request, 'X-Foo', 'bar');
     }
-
 
     /**
      * @expectedException \PHPUnit_Framework_AssertionFailedError
@@ -48,7 +41,6 @@ class ConstraintTest extends TestCase
         $this->assertMessageHasHeader($request, 'X-Foo', 'bar');
     }
 
-
     /**
      * @expectedException \PHPUnit_Framework_AssertionFailedError
      */
@@ -58,13 +50,11 @@ class ConstraintTest extends TestCase
         $this->assertMessageHasHeader($request, 'X-Foo', 'bar');
     }
 
-
     public function testHasHeaderCanSucceedWithConstraint()
     {
         $request = new Request('GET', '/', ['x-foo' => 14]);
         $this->assertMessageHasHeader($request, 'X-Foo', Assert::greaterThanOrEqual(10));
     }
-
 
     public function testHasHeadersCanSucceedWithConstraint()
     {
@@ -78,7 +68,6 @@ class ConstraintTest extends TestCase
         );
     }
 
-
     /**
      * @expectedException \PHPUnit_Framework_AssertionFailedError
      */
@@ -88,13 +77,11 @@ class ConstraintTest extends TestCase
         $this->assertMessageHasHeader($request, 'X-Foo', Assert::greaterThanOrEqual(10));
     }
 
-
     public function testBodyMatchesCanSucceed()
     {
         $request = new Request('GET', '/', [], 'foobar');
         $this->assertMessageBodyMatches($request, Assert::equalTo('foobar'));
     }
-
 
     /**
      * @expectedException \PHPUnit_Framework_AssertionFailedError
@@ -105,13 +92,11 @@ class ConstraintTest extends TestCase
         $this->assertMessageBodyMatches($request, Assert::equalTo('barbaz'));
     }
 
-
     public function testBodyMatchesJsonCanSucceed()
     {
         $request = new Request('GET', '/foo', ['content-type' => 'application/json'], json_encode(['foo' => 'bar']));
         $this->assertMessageBodyMatchesJson($request, array('$.foo' => 'bar'));
     }
-
 
     public function dataForRequestMethods()
     {
@@ -126,7 +111,6 @@ class ConstraintTest extends TestCase
         ];
     }
 
-
     /**
      * @param $method
      * @dataProvider dataForRequestMethods
@@ -136,12 +120,10 @@ class ConstraintTest extends TestCase
         $this->assertRequestHasMethod(new Request($method, '/'), $method);
     }
 
-
     public function testIsGetCanSucceed()
     {
         $this->assertRequestIsGet(new Request('GET', '/'));
     }
-
 
     /**
      * @expectedException \PHPUnit_Framework_AssertionFailedError
@@ -151,12 +133,10 @@ class ConstraintTest extends TestCase
         $this->assertRequestIsGet(new Request('POST', '/'));
     }
 
-
     public function testIsPostCanSucceed()
     {
         $this->assertRequestIsPost(new Request('POST', '/'));
     }
-
 
     /**
      * @expectedException \PHPUnit_Framework_AssertionFailedError
@@ -166,12 +146,10 @@ class ConstraintTest extends TestCase
         $this->assertRequestIsPost(new Request('GET', '/'));
     }
 
-
     public function testIsPutCanSucceed()
     {
         $this->assertRequestIsPut(new Request('PUT', '/'));
     }
-
 
     /**
      * @expectedException \PHPUnit_Framework_AssertionFailedError
@@ -181,12 +159,10 @@ class ConstraintTest extends TestCase
         $this->assertRequestIsPut(new Request('GET', '/'));
     }
 
-
     public function testIsDeleteCanSucceed()
     {
         $this->assertRequestIsDelete(new Request('DELETE', '/'));
     }
-
 
     /**
      * @expectedException \PHPUnit_Framework_AssertionFailedError
@@ -195,6 +171,5 @@ class ConstraintTest extends TestCase
     {
         $this->assertRequestIsDelete(new Request('POST', '/'));
     }
-
 
 }
