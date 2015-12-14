@@ -14,7 +14,8 @@
         "helmich/phpunit-json-assert": "^1.0"
     },
     "require-dev": {
-        "guzzlehttp/psr7": "^1.2"
+        "guzzlehttp/psr7": "^1.2",
+        "codeclimate/php-test-reporter": "dev-master"
     },
     "autoload": {
         "psr-4": {
