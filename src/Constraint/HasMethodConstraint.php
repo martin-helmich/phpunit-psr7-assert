@@ -34,5 +34,4 @@ class HasMethodConstraint extends Constraint
 
         return $other->getMethod() === $this->method;
     }
-
 }

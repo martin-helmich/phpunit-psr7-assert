@@ -34,5 +34,4 @@ class HasUriConstraint extends Constraint
 
         return $this->uri == $other->getUri()->__toString();
     }
-
 }
