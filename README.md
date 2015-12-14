@@ -1,5 +1,9 @@
 # PSR-7 assertions for PHPUnit
 
+[![Build Status](https://travis-ci.org/martin-helmich/phpunit-psr7-assert.svg?branch=master)](https://travis-ci.org/martin-helmich/phpunit-psr7-assert)
+[![Code Climate](https://codeclimate.com/github/martin-helmich/phpunit-psr7-assert/badges/gpa.svg)](https://codeclimate.com/github/martin-helmich/phpunit-psr7-assert)
+[![Test Coverage](https://codeclimate.com/github/martin-helmich/phpunit-psr7-assert/badges/coverage.svg)](https://codeclimate.com/github/martin-helmich/phpunit-psr7-assert/coverage)
+
 ## Author and copyright
 
 Martin Helmich <kontakt@martin-helmich.de>  
