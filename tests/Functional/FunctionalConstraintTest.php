@@ -194,4 +194,43 @@ class FunctionalConstraintTest extends TestCase
         assertThat(new Response(400), hasStatus(200));
     }
 
+    public function testIsSuccessCanSucceed()
+    {
+        assertThat(new Response(200), isSuccess());
+    }
+
+    /**
+     * @expectedException \PHPUnit_Framework_AssertionFailedError
+     */
+    public function testIsSuccessCanFail()
+    {
+        assertThat(new Response(404), isSuccess());
+    }
+
+    public function testIsClientErrorCanSucceed()
+    {
+        assertThat(new Response(404), isClientError());
+    }
+
+    /**
+     * @expectedException \PHPUnit_Framework_AssertionFailedError
+     */
+    public function testIsClientErrorCanFail()
+    {
+        assertThat(new Response(200), isClientError());
+    }
+
+    public function testIsServerErrorCanSucceed()
+    {
+        assertThat(new Response(503), isServerError());
+    }
+
+    /**
+     * @expectedException \PHPUnit_Framework_AssertionFailedError
+     */
+    public function testIsServerErrorCanFail()
+    {
+        assertThat(new Response(200), isServerError());
+    }
+
 }

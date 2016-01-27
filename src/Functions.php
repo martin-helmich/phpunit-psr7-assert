@@ -27,6 +27,21 @@ function hasStatus($status)
     return Psr7Assertions::hasStatus($status);
 }
 
+function isSuccess()
+{
+    return Psr7Assertions::isSuccess();
+}
+
+function isClientError()
+{
+    return Psr7Assertions::isClientError();
+}
+
+function isServerError()
+{
+    return Psr7Assertions::isServerError();
+}
+
 function hasContentType($contentType)
 {
     return new HasHeaderConstraint('Content-Type', $contentType);

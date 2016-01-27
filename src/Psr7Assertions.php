@@ -47,6 +47,21 @@ trait Psr7Assertions
         Assert::assertThat($response, static::hasStatus($status));
     }
 
+    public static function assertResponseIsSuccess(ResponseInterface $response)
+    {
+        Assert::assertThat($response, static::isSuccess());
+    }
+
+    public static function assertResponseIsClientError(ResponseInterface $response)
+    {
+        Assert::assertThat($response, static::isClientError());
+    }
+
+    public static function assertResponseIsServerError(ResponseInterface $response)
+    {
+        Assert::assertThat($response, static::isServerError());
+    }
+
     public static function assertRequestHasMethod(RequestInterface $request, $method)
     {
         Assert::assertThat($request, static::hasMethod($method));
@@ -85,6 +100,21 @@ trait Psr7Assertions
     public static function hasStatus($status)
     {
         return new HasStatusConstraint($status);
+    }
+
+    public static function isSuccess()
+    {
+        return new HasStatusConstraint(Assert::logicalAnd(Assert::greaterThanOrEqual(200), Assert::lessThan(300)));
+    }
+
+    public static function isClientError()
+    {
+        return new HasStatusConstraint(Assert::logicalAnd(Assert::greaterThanOrEqual(400), Assert::lessThan(500)));
+    }
+
+    public static function isServerError()
+    {
+        return new HasStatusConstraint(Assert::logicalAnd(Assert::greaterThanOrEqual(500), Assert::lessThan(600)));
     }
 
     public static function isGet()

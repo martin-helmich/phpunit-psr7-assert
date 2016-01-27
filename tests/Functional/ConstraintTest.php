@@ -199,4 +199,43 @@ class ConstraintTest extends TestCase
         $this->assertResponseHasStatus(new Response(400), 200);
     }
 
+    public function testIsSuccessCanSucceed()
+    {
+        $this->assertResponseIsSuccess(new Response(200));
+    }
+
+    /**
+     * @expectedException \PHPUnit_Framework_AssertionFailedError
+     */
+    public function testIsSuccessCanFail()
+    {
+        $this->assertResponseIsSuccess(new Response(404));
+    }
+
+    public function testIsClientErrorCanSucceed()
+    {
+        $this->assertResponseIsClientError(new Response(404));
+    }
+
+    /**
+     * @expectedException \PHPUnit_Framework_AssertionFailedError
+     */
+    public function testIsClientErrorCanFail()
+    {
+        $this->assertResponseIsClientError(new Response(200));
+    }
+
+    public function testIsServerErrorCanSucceed()
+    {
+        $this->assertResponseIsServerError(new Response(503));
+    }
+
+    /**
+     * @expectedException \PHPUnit_Framework_AssertionFailedError
+     */
+    public function testIsServerErrorCanFail()
+    {
+        $this->assertResponseIsServerError(new Response(200));
+    }
+
 }
