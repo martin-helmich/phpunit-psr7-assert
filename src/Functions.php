@@ -22,6 +22,11 @@ function hasHeaders(array $constraints)
     return Psr7Assertions::hasHeaders($constraints);
 }
 
+function hasStatus($status)
+{
+    return Psr7Assertions::hasStatus($status);
+}
+
 function hasContentType($contentType)
 {
     return new HasHeaderConstraint('Content-Type', $contentType);

@@ -2,6 +2,7 @@
 namespace Helmich\Psr7Assert\Tests\Functional;
 
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Psr7\Response;
 use Helmich\Psr7Assert\Psr7Assertions;
 use PHPUnit_Framework_Assert as Assert;
 use PHPUnit_Framework_TestCase as TestCase;
@@ -165,6 +166,32 @@ class FunctionalConstraintTest extends TestCase
     public function testIsDeleteCanFail()
     {
         assertThat(new Request('POST', '/'), isDelete());
+    }
+
+    public function dataForStatusCodes()
+    {
+        return [
+            [200],
+            [400],
+            [404],
+            [500],
+        ];
+    }
+
+    /**
+     * @dataProvider dataForStatusCodes
+     */
+    public function testHasStatusCanSucceed($status)
+    {
+        assertThat(new Response($status), hasStatus($status));
+    }
+
+    /**
+     * @expectedException \PHPUnit_Framework_AssertionFailedError
+     */
+    public function testHasStatusCanFail()
+    {
+        assertThat(new Response(400), hasStatus(200));
     }
 
 }
