@@ -2,6 +2,7 @@
 namespace Helmich\Psr7Assert\Tests\Functional;
 
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Psr7\Response;
 use Helmich\Psr7Assert\Psr7Assertions;
 use PHPUnit_Framework_Assert as Assert;
 use PHPUnit_Framework_TestCase as TestCase;
@@ -170,6 +171,71 @@ class ConstraintTest extends TestCase
     public function testIsDeleteCanFail()
     {
         $this->assertRequestIsDelete(new Request('POST', '/'));
+    }
+
+    public function dataForStatusCodes()
+    {
+        return [
+            [200],
+            [400],
+            [404],
+            [500],
+        ];
+    }
+
+    /**
+     * @dataProvider dataForStatusCodes
+     */
+    public function testHasStatusCanSucceed($status)
+    {
+        $this->assertResponseHasStatus(new Response($status), $status);
+    }
+
+    /**
+     * @expectedException \PHPUnit_Framework_AssertionFailedError
+     */
+    public function testHasStatusCanFail()
+    {
+        $this->assertResponseHasStatus(new Response(400), 200);
+    }
+
+    public function testIsSuccessCanSucceed()
+    {
+        $this->assertResponseIsSuccess(new Response(200));
+    }
+
+    /**
+     * @expectedException \PHPUnit_Framework_AssertionFailedError
+     */
+    public function testIsSuccessCanFail()
+    {
+        $this->assertResponseIsSuccess(new Response(404));
+    }
+
+    public function testIsClientErrorCanSucceed()
+    {
+        $this->assertResponseIsClientError(new Response(404));
+    }
+
+    /**
+     * @expectedException \PHPUnit_Framework_AssertionFailedError
+     */
+    public function testIsClientErrorCanFail()
+    {
+        $this->assertResponseIsClientError(new Response(200));
+    }
+
+    public function testIsServerErrorCanSucceed()
+    {
+        $this->assertResponseIsServerError(new Response(503));
+    }
+
+    /**
+     * @expectedException \PHPUnit_Framework_AssertionFailedError
+     */
+    public function testIsServerErrorCanFail()
+    {
+        $this->assertResponseIsServerError(new Response(200));
     }
 
 }

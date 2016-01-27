@@ -5,12 +5,14 @@ use Helmich\JsonAssert\Constraint\JsonValueMatchesMany;
 use Helmich\Psr7Assert\Constraint\BodyMatchesConstraint;
 use Helmich\Psr7Assert\Constraint\HasHeaderConstraint;
 use Helmich\Psr7Assert\Constraint\HasMethodConstraint;
+use Helmich\Psr7Assert\Constraint\HasStatusConstraint;
 use Helmich\Psr7Assert\Constraint\HasUriConstraint;
 use PHPUnit_Framework_Assert as Assert;
 use PHPUnit_Framework_Constraint as Constraint;
 use PHPUnit_Framework_Constraint_IsEqual as IsEqual;
 use Psr\Http\Message\MessageInterface;
 use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 
 trait Psr7Assertions
 {
@@ -38,6 +40,26 @@ trait Psr7Assertions
     public static function assertMessageBodyMatchesJson(MessageInterface $message, array $jsonConstraints)
     {
         Assert::assertThat($message, static::bodyMatchesJson($jsonConstraints));
+    }
+
+    public static function assertResponseHasStatus(ResponseInterface $response, $status)
+    {
+        Assert::assertThat($response, static::hasStatus($status));
+    }
+
+    public static function assertResponseIsSuccess(ResponseInterface $response)
+    {
+        Assert::assertThat($response, static::isSuccess());
+    }
+
+    public static function assertResponseIsClientError(ResponseInterface $response)
+    {
+        Assert::assertThat($response, static::isClientError());
+    }
+
+    public static function assertResponseIsServerError(ResponseInterface $response)
+    {
+        Assert::assertThat($response, static::isServerError());
     }
 
     public static function assertRequestHasMethod(RequestInterface $request, $method)
@@ -73,6 +95,26 @@ trait Psr7Assertions
     public static function hasMethod($method)
     {
         return new HasMethodConstraint($method);
+    }
+
+    public static function hasStatus($status)
+    {
+        return new HasStatusConstraint($status);
+    }
+
+    public static function isSuccess()
+    {
+        return new HasStatusConstraint(Assert::logicalAnd(Assert::greaterThanOrEqual(200), Assert::lessThan(300)));
+    }
+
+    public static function isClientError()
+    {
+        return new HasStatusConstraint(Assert::logicalAnd(Assert::greaterThanOrEqual(400), Assert::lessThan(500)));
+    }
+
+    public static function isServerError()
+    {
+        return new HasStatusConstraint(Assert::logicalAnd(Assert::greaterThanOrEqual(500), Assert::lessThan(600)));
     }
 
     public static function isGet()
