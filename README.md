@@ -143,6 +143,22 @@ method, shorthand assertions are available:
 - `assertRequestIsPut($request)` / `isPut()`
 - `assertRequestIsDelete($request)` / `isDelete()`
 
+#### `assertResponseHasStatus($response, $status)` / `hasStatus($status)`
+
+Asserts that the response status matches a given constraint. If `$status` is a
+scalar value, this assertion will check for equality.
+
+```php
+assertThat($response, hasStatus(200));
+assertThat($response, hasStatus(logicalAnd(greaterThanOrEqual(200), lessThan(400))));
+```
+
+For the most common checks, some shorthand assertions are available:
+
+- `assertResponseIsSuccess($response)` / `isSuccess()` -- Status codes 200 to 299
+- `assertResponseIsClientError($response)` / `isClientError()` -- Status codes 400 to 499
+- `assertResponseIsServerError($response)` / `isServerError()` -- Status codes 500 to 599
+
 [composer-autoload]: https://getcomposer.org/doc/04-schema.md#autoload-dev
 [json-assert]: https://packagist.org/packages/helmich/phpunit-json-assert
 [psr7]: https://packagist.org/packages/psr/http-message
