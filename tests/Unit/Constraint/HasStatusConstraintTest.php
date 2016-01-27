@@ -5,6 +5,7 @@ use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use Helmich\Psr7Assert\Constraint\HasStatusConstraint;
 use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit_Framework_Assert as Assert;
 
 class HasStatusConstraintTest extends TestCase
 {
@@ -17,6 +18,14 @@ class HasStatusConstraintTest extends TestCase
         $constraint->evaluate($response);
     }
 
+    public function testStatusCanBeAnyConstraint()
+    {
+        $response = new Response(234);
+
+        $constraint = new HasStatusConstraint(Assert::lessThan(300));
+        $constraint->evaluate($response);
+    }
+
     /**
      * @expectedException \PHPUnit_Framework_AssertionFailedError
      */
@@ -25,6 +34,17 @@ class HasStatusConstraintTest extends TestCase
         $response = new Response(404);
 
         $constraint = new HasStatusConstraint(200);
+        $constraint->evaluate($response);
+    }
+
+    /**
+     * @expectedException \PHPUnit_Framework_AssertionFailedError
+     */
+    public function testStatusCanBeAnyConstraintAndCanFail()
+    {
+        $response = new Response(234);
+
+        $constraint = new HasStatusConstraint(Assert::greaterThanOrEqual(300));
         $constraint->evaluate($response);
     }
 
