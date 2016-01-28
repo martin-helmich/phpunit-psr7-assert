@@ -233,4 +233,14 @@ class FunctionalConstraintTest extends TestCase
         assertThat(new Response(200), isServerError());
     }
 
+    public function testHasContentTypeSucceedsOnEquality()
+    {
+        assertThat(new Response(200, ['content-type' => ['application/json']]), hasContentType('application/json'));
+    }
+
+    public function testHasContentTypeSucceedsWithCharset()
+    {
+        assertThat(new Response(200, ['content-type' => ['application/json;charset=utf8']]), hasContentType('application/json'));
+    }
+
 }

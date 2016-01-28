@@ -44,7 +44,10 @@ function isServerError()
 
 function hasContentType($contentType)
 {
-    return new HasHeaderConstraint('Content-Type', $contentType);
+    return new HasHeaderConstraint(
+        'Content-Type',
+        Assert::matchesRegularExpression(',^' . preg_quote($contentType) . '(;.+)?$,')
+    );
 }
 
 function hasMethod($method)
