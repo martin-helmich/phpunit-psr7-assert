@@ -168,7 +168,7 @@ trait Psr7Assertions
     public static function bodyMatchesJson(array $constraints)
     {
         return Assert::logicalAnd(
-            self::hasHeaderEqualTo('content-type', 'application/json'),
+            self::hasHeader('content-type', Assert::matchesRegularExpression(',^application/json(;.+)?$,')),
             self::bodyMatches(
                 Assert::logicalAnd(
                     Assert::isJson(),

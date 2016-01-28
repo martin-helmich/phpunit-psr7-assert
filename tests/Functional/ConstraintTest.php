@@ -99,6 +99,12 @@ class ConstraintTest extends TestCase
         $this->assertMessageBodyMatchesJson($request, array('$.foo' => 'bar'));
     }
 
+    public function testBodyMatchesJsonCanSucceedWithCharset()
+    {
+        $request = new Request('GET', '/foo', ['content-type' => 'application/json;charset=utf8'], json_encode(['foo' => 'bar']));
+        $this->assertMessageBodyMatchesJson($request, array('$.foo' => 'bar'));
+    }
+
     public function dataForRequestMethods()
     {
         return [
