@@ -24,7 +24,7 @@ class BodyMatchesConstraintTest extends TestCase
      */
     public function testMatchFailsOnWrongType($var)
     {
-        $inner = $this->prophesize('PHPUnit_Framework_Constraint');
+        $inner = $this->prophesize(Constraint::class);
 
         $constraint = new BodyMatchesConstraint($inner->reveal());
         self::assertThat($constraint->evaluate($var, '', true), self::isFalse());
