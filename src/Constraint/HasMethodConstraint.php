@@ -10,7 +10,7 @@ class HasMethodConstraint extends Constraint
     /** @var string */
     private $method;
 
-    public function __construct($method)
+    public function __construct(string $method)
     {
         parent::__construct();
         $this->method = $method;
@@ -21,12 +21,12 @@ class HasMethodConstraint extends Constraint
      *
      * @return string
      */
-    public function toString()
+    public function toString(): string
     {
         return "has request method {$this->method}";
     }
 
-    protected function matches($other)
+    protected function matches($other): bool
     {
         if (!$other instanceof RequestInterface) {
             return false;

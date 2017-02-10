@@ -14,7 +14,7 @@ class HasHeaderConstraint extends Constraint
     /** @var Constraint */
     private $constraint;
 
-    public function __construct($name, $constraint = null)
+    public function __construct(string $name, $constraint = null)
     {
         parent::__construct();
 
@@ -33,12 +33,12 @@ class HasHeaderConstraint extends Constraint
      *
      * @return string
      */
-    public function toString()
+    public function toString(): string
     {
         return "has header '{$this->name}' that {$this->constraint->toString()}";
     }
 
-    protected function matches($other)
+    protected function matches($other): bool
     {
         if (!$other instanceof MessageInterface) {
             return false;

@@ -27,12 +27,12 @@ class HasStatusConstraint extends Constraint
      *
      * @return string
      */
-    public function toString()
+    public function toString(): string
     {
         return "response status {$this->status->toString()}";
     }
 
-    protected function matches($other)
+    protected function matches($other): bool
     {
         if (!$other instanceof ResponseInterface) {
             return false;

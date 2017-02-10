@@ -6,43 +6,44 @@ use Helmich\Psr7Assert\Constraint\HasHeaderConstraint;
 use Helmich\Psr7Assert\Constraint\HasUriConstraint;
 use Helmich\Psr7Assert\Psr7Assertions;
 use PHPUnit\Framework\Assert;
+use PHPUnit\Framework\Constraint\Constraint;
 
-function hasUri($uri)
+function hasUri(string $uri): HasUriConstraint
 {
     return new HasUriConstraint($uri);
 }
 
-function hasHeader($name, $constraint = null)
+function hasHeader(string $name, $constraint = null): HasHeaderConstraint
 {
     return new HasHeaderConstraint($name, $constraint);
 }
 
-function hasHeaders(array $constraints)
+function hasHeaders(array $constraints): Constraint
 {
     return Psr7Assertions::hasHeaders($constraints);
 }
 
-function hasStatus($status)
+function hasStatus($status): Constraint
 {
     return Psr7Assertions::hasStatus($status);
 }
 
-function isSuccess()
+function isSuccess(): Constraint
 {
     return Psr7Assertions::isSuccess();
 }
 
-function isClientError()
+function isClientError(): Constraint
 {
     return Psr7Assertions::isClientError();
 }
 
-function isServerError()
+function isServerError(): Constraint
 {
     return Psr7Assertions::isServerError();
 }
 
-function hasContentType($contentType)
+function hasContentType(string $contentType): Constraint
 {
     return new HasHeaderConstraint(
         'Content-Type',
@@ -50,37 +51,37 @@ function hasContentType($contentType)
     );
 }
 
-function hasMethod($method)
+function hasMethod(string $method): Constraint
 {
     return Psr7Assertions::hasMethod($method);
 }
 
-function isGet()
+function isGet(): Constraint
 {
     return Psr7Assertions::isGet();
 }
 
-function isPost()
+function isPost(): Constraint
 {
     return Psr7Assertions::isPost();
 }
 
-function isPut()
+function isPut(): Constraint
 {
     return Psr7Assertions::isPut();
 }
 
-function isDelete()
+function isDelete(): Constraint
 {
     return Psr7Assertions::isDelete();
 }
 
-function bodyMatches($constraint)
+function bodyMatches($constraint): Constraint
 {
     return new BodyMatchesConstraint($constraint);
 }
 
-function bodyMatchesJson($constraints)
+function bodyMatchesJson($constraints): Constraint
 {
     return Assert::logicalAnd(
         hasContentType('application/json'),
