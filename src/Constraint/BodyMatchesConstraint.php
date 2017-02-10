@@ -1,7 +1,8 @@
 <?php
+declare(strict_types=1);
 namespace Helmich\Psr7Assert\Constraint;
 
-use PHPUnit_Framework_Constraint as Constraint;
+use PHPUnit\Framework\Constraint\Constraint;
 use Psr\Http\Message\MessageInterface;
 
 class BodyMatchesConstraint extends Constraint
@@ -10,7 +11,7 @@ class BodyMatchesConstraint extends Constraint
     /** @var Constraint */
     private $constraint;
 
-    public function __construct($constraint)
+    public function __construct(Constraint $constraint)
     {
         parent::__construct();
         $this->constraint = $constraint;
@@ -21,12 +22,12 @@ class BodyMatchesConstraint extends Constraint
      *
      * @return string
      */
-    public function toString()
+    public function toString(): string
     {
         return "message body matches " . $this->constraint->toString();
     }
 
-    protected function matches($other)
+    protected function matches($other): bool
     {
         if (!$other instanceof MessageInterface) {
             return false;

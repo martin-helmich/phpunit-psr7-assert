@@ -1,11 +1,12 @@
 <?php
+declare(strict_types=1);
 namespace Helmich\Psr7Assert\Tests\Functional;
 
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use Helmich\Psr7Assert\Psr7Assertions;
-use PHPUnit_Framework_Assert as Assert;
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\Assert;
+use PHPUnit\Framework\TestCase;
 
 class ConstraintTest extends TestCase
 {
@@ -19,7 +20,7 @@ class ConstraintTest extends TestCase
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_AssertionFailedError
+     * @expectedException \PHPUnit\Framework\AssertionFailedError
      */
     public function testHasUriCanFail()
     {
@@ -34,7 +35,7 @@ class ConstraintTest extends TestCase
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_AssertionFailedError
+     * @expectedException \PHPUnit\Framework\AssertionFailedError
      */
     public function testHasHeaderCanFailWithPrimitiveValue()
     {
@@ -43,7 +44,7 @@ class ConstraintTest extends TestCase
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_AssertionFailedError
+     * @expectedException \PHPUnit\Framework\AssertionFailedError
      */
     public function testHasHeaderCanFailWithNonExistingHeader()
     {
@@ -70,7 +71,7 @@ class ConstraintTest extends TestCase
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_AssertionFailedError
+     * @expectedException \PHPUnit\Framework\AssertionFailedError
      */
     public function testHasHeaderCanFailWithConstraint()
     {
@@ -85,7 +86,7 @@ class ConstraintTest extends TestCase
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_AssertionFailedError
+     * @expectedException \PHPUnit\Framework\AssertionFailedError
      */
     public function testBodyMatchesCanFail()
     {
@@ -133,7 +134,7 @@ class ConstraintTest extends TestCase
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_AssertionFailedError
+     * @expectedException \PHPUnit\Framework\AssertionFailedError
      */
     public function testIsGetCanFail()
     {
@@ -146,7 +147,7 @@ class ConstraintTest extends TestCase
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_AssertionFailedError
+     * @expectedException \PHPUnit\Framework\AssertionFailedError
      */
     public function testIsPostCanFail()
     {
@@ -159,7 +160,7 @@ class ConstraintTest extends TestCase
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_AssertionFailedError
+     * @expectedException \PHPUnit\Framework\AssertionFailedError
      */
     public function testIsPutCanFail()
     {
@@ -172,7 +173,7 @@ class ConstraintTest extends TestCase
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_AssertionFailedError
+     * @expectedException \PHPUnit\Framework\AssertionFailedError
      */
     public function testIsDeleteCanFail()
     {
@@ -198,7 +199,7 @@ class ConstraintTest extends TestCase
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_AssertionFailedError
+     * @expectedException \PHPUnit\Framework\AssertionFailedError
      */
     public function testHasStatusCanFail()
     {
@@ -211,7 +212,7 @@ class ConstraintTest extends TestCase
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_AssertionFailedError
+     * @expectedException \PHPUnit\Framework\AssertionFailedError
      */
     public function testIsSuccessCanFail()
     {
@@ -224,7 +225,7 @@ class ConstraintTest extends TestCase
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_AssertionFailedError
+     * @expectedException \PHPUnit\Framework\AssertionFailedError
      */
     public function testIsClientErrorCanFail()
     {
@@ -237,7 +238,7 @@ class ConstraintTest extends TestCase
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_AssertionFailedError
+     * @expectedException \PHPUnit\Framework\AssertionFailedError
      */
     public function testIsServerErrorCanFail()
     {

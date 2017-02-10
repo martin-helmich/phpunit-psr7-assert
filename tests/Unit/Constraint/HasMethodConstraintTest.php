@@ -1,9 +1,10 @@
 <?php
+declare(strict_types=1);
 namespace Helmich\Psr7Assert\Tests\Unit\Constraint;
 
 use GuzzleHttp\Psr7\Request;
 use Helmich\Psr7Assert\Constraint\HasMethodConstraint;
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 
 class HasMethodConstraintTest extends TestCase
 {
@@ -17,7 +18,7 @@ class HasMethodConstraintTest extends TestCase
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_AssertionFailedError
+     * @expectedException \PHPUnit\Framework\AssertionFailedError
      */
     public function testMethodIsEvaluatedForEqualityAndCanFail()
     {
@@ -28,7 +29,7 @@ class HasMethodConstraintTest extends TestCase
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_AssertionFailedError
+     * @expectedException \PHPUnit\Framework\AssertionFailedError
      */
     public function testNonMessagesAreNotEvaluated()
     {

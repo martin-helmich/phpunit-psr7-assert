@@ -1,8 +1,9 @@
 <?php
+declare(strict_types=1);
 namespace Helmich\Psr7Assert\Constraint;
 
-use PHPUnit_Framework_Assert as Assert;
-use PHPUnit_Framework_Constraint as Constraint;
+use PHPUnit\Framework\Assert;
+use PHPUnit\Framework\Constraint\Constraint;
 use Psr\Http\Message\ResponseInterface;
 
 class HasStatusConstraint extends Constraint
@@ -27,12 +28,12 @@ class HasStatusConstraint extends Constraint
      *
      * @return string
      */
-    public function toString()
+    public function toString(): string
     {
         return "response status {$this->status->toString()}";
     }
 
-    protected function matches($other)
+    protected function matches($other): bool
     {
         if (!$other instanceof ResponseInterface) {
             return false;
