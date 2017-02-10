@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 use Helmich\JsonAssert\Constraint\JsonValueMatchesMany;
 use Helmich\Psr7Assert\Constraint\BodyMatchesConstraint;

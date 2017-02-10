@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 namespace Helmich\Psr7Assert\Tests\Unit\Constraint;
 
 use GuzzleHttp\Psr7\Request;
