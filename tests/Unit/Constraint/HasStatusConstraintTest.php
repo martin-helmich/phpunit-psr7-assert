@@ -4,8 +4,8 @@ namespace Helmich\Psr7Assert\Tests\Unit\Constraint;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use Helmich\Psr7Assert\Constraint\HasStatusConstraint;
-use PHPUnit_Framework_TestCase as TestCase;
-use PHPUnit_Framework_Assert as Assert;
+use PHPUnit\Framework\Assert;
+use PHPUnit\Framework\TestCase;
 
 class HasStatusConstraintTest extends TestCase
 {
@@ -27,7 +27,7 @@ class HasStatusConstraintTest extends TestCase
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_AssertionFailedError
+     * @expectedException \PHPUnit\Framework\AssertionFailedError
      */
     public function testMethodIsEvaluatedForEqualityAndCanFail()
     {
@@ -38,7 +38,7 @@ class HasStatusConstraintTest extends TestCase
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_AssertionFailedError
+     * @expectedException \PHPUnit\Framework\AssertionFailedError
      */
     public function testStatusCanBeAnyConstraintAndCanFail()
     {
@@ -49,7 +49,7 @@ class HasStatusConstraintTest extends TestCase
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_AssertionFailedError
+     * @expectedException \PHPUnit\Framework\AssertionFailedError
      */
     public function testNonMessagesAreNotEvaluated()
     {

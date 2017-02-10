@@ -3,7 +3,8 @@ namespace Helmich\Psr7Assert\Tests\Unit\Constraint;
 
 use GuzzleHttp\Psr7\Request;
 use Helmich\Psr7Assert\Constraint\BodyMatchesConstraint;
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\Constraint\Constraint;
+use PHPUnit\Framework\TestCase;
 
 class BodyMatchesConstraintTest extends TestCase
 {
@@ -48,7 +49,7 @@ class BodyMatchesConstraintTest extends TestCase
     {
         $request = new Request('POST', '/', [], $body);
 
-        $inner = $this->prophesize('PHPUnit_Framework_Constraint');
+        $inner = $this->prophesize(Constraint::class);
         $inner->evaluate($body, '', true)->shouldBeCalled()->willReturn($matches);
 
         $constraint = new BodyMatchesConstraint($inner->reveal());

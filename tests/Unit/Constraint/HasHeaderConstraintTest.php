@@ -3,7 +3,7 @@ namespace Helmich\Psr7Assert\Tests\Unit\Constraint;
 
 use GuzzleHttp\Psr7\Request;
 use Helmich\Psr7Assert\Constraint\HasHeaderConstraint;
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 
 class HasHeaderConstraintTest extends TestCase
 {
@@ -29,7 +29,7 @@ class HasHeaderConstraintTest extends TestCase
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_AssertionFailedError
+     * @expectedException \PHPUnit\Framework\AssertionFailedError
      */
     public function testDefaultConstraintFailsWhenHeaderIsEmpty()
     {
@@ -40,7 +40,7 @@ class HasHeaderConstraintTest extends TestCase
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_AssertionFailedError
+     * @expectedException \PHPUnit\Framework\AssertionFailedError
      */
     public function testDefaultConstraintFailsWhenHeaderIsNotSet()
     {
@@ -72,7 +72,7 @@ class HasHeaderConstraintTest extends TestCase
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_AssertionFailedError
+     * @expectedException \PHPUnit\Framework\AssertionFailedError
      */
     public function testComplexConstraintsAreMatchedOnEachHeaderAndCanFail()
     {
@@ -84,7 +84,7 @@ class HasHeaderConstraintTest extends TestCase
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_AssertionFailedError
+     * @expectedException \PHPUnit\Framework\AssertionFailedError
      */
     public function testNonMessagesAreNotEvaluated()
     {
