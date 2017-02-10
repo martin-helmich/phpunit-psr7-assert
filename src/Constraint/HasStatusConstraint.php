@@ -1,8 +1,8 @@
 <?php
 namespace Helmich\Psr7Assert\Constraint;
 
-use PHPUnit_Framework_Assert as Assert;
-use PHPUnit_Framework_Constraint as Constraint;
+use PHPUnit\Framework\Assert;
+use PHPUnit\Framework\Constraint\Constraint;
 use Psr\Http\Message\ResponseInterface;
 
 class HasStatusConstraint extends Constraint

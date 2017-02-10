@@ -1,7 +1,7 @@
 <?php
 namespace Helmich\Psr7Assert\Constraint;
 
-use PHPUnit_Framework_Constraint as Constraint;
+use PHPUnit\Framework\Constraint\Constraint;
 use Psr\Http\Message\MessageInterface;
 
 class BodyMatchesConstraint extends Constraint
