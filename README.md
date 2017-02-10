@@ -13,6 +13,8 @@ This library is [MIT-licensed](LICENSE.txt).
 
     $ composer require helmich/phpunit-psr7-assert
 
+**Compatibility notice**: [Version 1](https://github.com/martin-helmich/phpunit-psr7-assert/tree/v1) (the `v1` branch) of this library is compatible with PHPUnit 4.8 to 5. [Version 2](https://github.com/martin-helmich/phpunit-psr7-assert/tree/master) (the `master` branch) is compatible with PHPUnit 6 and later. When using `composer require`, Composer should automatically pick the correct version for you.
+
 ## Usage
 
 ### Using the `Psr7Assertions` trait
@@ -24,8 +26,9 @@ your test cases:
 ```php
 <?php
 use Helmich\Psr7Assert\Psr7Assertions;
+use PHPUnit\Framework\Testcase;
 
-class MyTestCase extends PHPUnit_Framework_Testcase
+class MyTestCase extends Testcase
 {
   use Psr7Assertions;
 
@@ -94,7 +97,7 @@ Asserts that the header named `$header` is present in the HTTP message. The exac
    present and not empty.
 2. If a primitive value is given as `$constraint`, the assertion will match when
    the header is present and is equal to the specified value
-3. If `$constraint` is an instance of the `PHPUnit_Framework_Constraint` class,
+3. If `$constraint` is an instance of the `PHPUnit\Framework\Constraint\Constraint` class,
    the assertion will match when the constraint evaluates to `TRUE`.
 
     Example:
@@ -121,7 +124,7 @@ assertThat($request, hasHeaders([
 
 Asserts that the message body matches the constraint `$constraint`. If
 `$constraint` is a primitive value, the assertion will pass when the message
-body is equal to the constraint. If `$constraint` is an instance of the `PHPUnit_Framework_Constraint` class, the constraint will be evaluated as-is.
+body is equal to the constraint. If `$constraint` is an instance of the `PHPUnit\Framework\Constraint\Constraint` class, the constraint will be evaluated as-is.
 
 ##### `assertMessageBodyMatchesJson($message, $jsonConstraints)` / `bodyMatchesJson($jsonConstraints)`
 
