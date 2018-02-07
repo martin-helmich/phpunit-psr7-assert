@@ -14,7 +14,7 @@ class HasUriConstraintTest extends TestCase
         $request = new Request('GET', '/foo');
 
         $constraint = new HasUriConstraint('/foo');
-        $constraint->evaluate($request);
+        self::assertTrue($constraint->evaluate($request, '', true));
     }
 
     /**

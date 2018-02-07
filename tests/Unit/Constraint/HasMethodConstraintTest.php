@@ -14,7 +14,7 @@ class HasMethodConstraintTest extends TestCase
         $request = new Request('GET', '/foo');
 
         $constraint = new HasMethodConstraint('GET');
-        $constraint->evaluate($request);
+        self::assertTrue($constraint->evaluate($request, '', true));
     }
 
     /**

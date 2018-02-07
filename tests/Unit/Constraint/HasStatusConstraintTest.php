@@ -16,7 +16,7 @@ class HasStatusConstraintTest extends TestCase
         $response = new Response(234);
 
         $constraint = new HasStatusConstraint(234);
-        $constraint->evaluate($response);
+        self::assertTrue($constraint->evaluate($response, '', true));
     }
 
     public function testStatusCanBeAnyConstraint()
@@ -24,7 +24,7 @@ class HasStatusConstraintTest extends TestCase
         $response = new Response(234);
 
         $constraint = new HasStatusConstraint(Assert::lessThan(300));
-        $constraint->evaluate($response);
+        self::assertTrue($constraint->evaluate($response, '', true));
     }
 
     /**
