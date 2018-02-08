@@ -18,72 +18,72 @@ use Psr\Http\Message\ResponseInterface;
 trait Psr7Assertions
 {
 
-    public static function assertRequestHasUri(RequestInterface $request, string $uri)
+    public static function assertRequestHasUri(RequestInterface $request, string $uri): void
     {
         Assert::assertThat($request, static::hasUri($uri));
     }
 
-    public static function assertMessageHasHeader(MessageInterface $message, string $headerName, $headerValue = null)
+    public static function assertMessageHasHeader(MessageInterface $message, string $headerName, $headerValue = null): void
     {
         Assert::assertThat($message, static::hasHeader($headerName, $headerValue));
     }
 
-    public static function assertMessageHasHeaders(MessageInterface $message, array $constraints)
+    public static function assertMessageHasHeaders(MessageInterface $message, array $constraints): void
     {
         Assert::assertThat($message, static::hasHeaders($constraints));
     }
 
-    public static function assertMessageBodyMatches(MessageInterface $message, $constraint)
+    public static function assertMessageBodyMatches(MessageInterface $message, $constraint): void
     {
         Assert::assertThat($message, static::bodyMatches($constraint));
     }
 
-    public static function assertMessageBodyMatchesJson(MessageInterface $message, array $jsonConstraints)
+    public static function assertMessageBodyMatchesJson(MessageInterface $message, array $jsonConstraints): void
     {
         Assert::assertThat($message, static::bodyMatchesJson($jsonConstraints));
     }
 
-    public static function assertResponseHasStatus(ResponseInterface $response, int $status)
+    public static function assertResponseHasStatus(ResponseInterface $response, int $status): void
     {
         Assert::assertThat($response, static::hasStatus($status));
     }
 
-    public static function assertResponseIsSuccess(ResponseInterface $response)
+    public static function assertResponseIsSuccess(ResponseInterface $response): void
     {
         Assert::assertThat($response, static::isSuccess());
     }
 
-    public static function assertResponseIsClientError(ResponseInterface $response)
+    public static function assertResponseIsClientError(ResponseInterface $response): void
     {
         Assert::assertThat($response, static::isClientError());
     }
 
-    public static function assertResponseIsServerError(ResponseInterface $response)
+    public static function assertResponseIsServerError(ResponseInterface $response): void
     {
         Assert::assertThat($response, static::isServerError());
     }
 
-    public static function assertRequestHasMethod(RequestInterface $request, string $method)
+    public static function assertRequestHasMethod(RequestInterface $request, string $method): void
     {
         Assert::assertThat($request, static::hasMethod($method));
     }
 
-    public static function assertRequestIsGet(RequestInterface $request)
+    public static function assertRequestIsGet(RequestInterface $request): void
     {
         Assert::assertThat($request, static::isGet());
     }
 
-    public static function assertRequestIsPost(RequestInterface $request)
+    public static function assertRequestIsPost(RequestInterface $request): void
     {
         Assert::assertThat($request, static::isPost());
     }
 
-    public static function assertRequestIsPut(RequestInterface $request)
+    public static function assertRequestIsPut(RequestInterface $request): void
     {
         Assert::assertThat($request, static::isPut());
     }
 
-    public static function assertRequestIsDelete(RequestInterface $request)
+    public static function assertRequestIsDelete(RequestInterface $request): void
     {
         Assert::assertThat($request, static::isDelete());
     }

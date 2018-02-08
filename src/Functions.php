@@ -48,7 +48,7 @@ function hasContentType(string $contentType): Constraint
 {
     return new HasHeaderConstraint(
         'Content-Type',
-        Assert::matchesRegularExpression(',^' . preg_quote($contentType) . '(;.+)?$,')
+        Assert::matchesRegularExpression(',^' . preg_quote($contentType, '/') . '(;.+)?$,')
     );
 }
 
