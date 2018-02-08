@@ -13,7 +13,7 @@ This library is [MIT-licensed](LICENSE.txt).
 
     $ composer require helmich/phpunit-psr7-assert
 
-**Compatibility notice**: [Version 1](https://github.com/martin-helmich/phpunit-psr7-assert/tree/v1) (the `v1` branch) of this library is compatible with PHPUnit 4.8 to 5. [Version 2](https://github.com/martin-helmich/phpunit-psr7-assert/tree/master) (the `master` branch) is compatible with PHPUnit 6 and later. When using `composer require`, Composer should automatically pick the correct version for you.
+**Compatibility notice**: [Version 1](https://github.com/martin-helmich/phpunit-psr7-assert/tree/v1) (the `v1` branch) of this library is compatible with PHPUnit 4.8 to 5. [Version 2](https://github.com/martin-helmich/phpunit-psr7-assert/tree/v2) (the `v2` branch) is compatible with PHPUnit 6. [Version 3](https://github.com/martin-helmich/phpunit-psr7-assert/tree/master) (the `master` branch) is compatible with PHPUnit 7. When using `composer require`, Composer should automatically pick the correct version for you.
 
 ## Usage
 
