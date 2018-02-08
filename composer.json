@@ -10,9 +10,9 @@
     ],
     "require": {
         "psr/http-message": "^1.0",
-        "phpunit/phpunit": ">=6.0",
+        "phpunit/phpunit": "^7.0",
         "helmich/phpunit-json-assert": "^2.0",
-        "php": ">=7.0"
+        "php": ">=7.1"
     },
     "require-dev": {
         "guzzlehttp/psr7": "^1.2",
