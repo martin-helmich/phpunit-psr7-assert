@@ -42,10 +42,10 @@ class HasStatusConstraint extends Constraint
         return $this->status->evaluate($other->getStatusCode(), '', true);
     }
 
-    protected function additionalFailureDescription($other)
+    protected function additionalFailureDescription($other): string
     {
         if ($other instanceof ResponseInterface) {
-            return 'Actual status is ' . $other->getStatusCode() . " and the body contains: " . $other->getBody();
+            return 'Actual status is ' . $other->getStatusCode() . ' and the body contains: ' . $other->getBody();
         }
         return '';
     }
