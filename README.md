@@ -4,6 +4,11 @@
 [![Code Climate](https://codeclimate.com/github/martin-helmich/phpunit-psr7-assert/badges/gpa.svg)](https://codeclimate.com/github/martin-helmich/phpunit-psr7-assert)
 [![Test Coverage](https://codeclimate.com/github/martin-helmich/phpunit-psr7-assert/badges/coverage.svg)](https://codeclimate.com/github/martin-helmich/phpunit-psr7-assert/coverage)
 
+This library adds several new assertions to [PHPUnit](https://phpunit.de/)
+that allow you to easily and concisely test HTTP request and response
+messages that implement the [PSR-7](https://www.php-fig.org/psr/psr-7/)
+interfaces.
+
 ## Author and copyright
 
 Martin Helmich <kontakt@martin-helmich.de>  
@@ -15,7 +20,9 @@ This library is [MIT-licensed](LICENSE.txt).
 
 ## Compatibility
 
-There are several release branches of this library, each of these being compatible with different releases of PHPUnit and PHP. The following table should give an easy overview:
+There are several release branches of this library, each of these being compatible
+with different releases of PHPUnit and PHP. The following table should give an
+easy overview:
 
 | PSR-7 assertion version | PHPUnit 4 | PHPUnit 5 | PHPUnit 6 | PHPUnit 7 |
 | ----------------------- | --------- | --------- | --------- | --------- |
@@ -23,7 +30,9 @@ There are several release branches of this library, each of these being compatib
 | v2 (branch `v2`) | :no_entry_sign: | :no_entry_sign: | :white_check_mark: | :no_entry_sign: |
 | v3 (branch `master`) | :no_entry_sign: | :no_entry_sign: | :no_entry_sign: | :white_check_mark: |
 
-When you are using `composer require` and have already declared a dependency to `phpunit/phpunit` in your `composer.json` file, Composer should pick latest compatible version automatically.
+When you are using `composer require` and have already declared a dependency to
+`phpunit/phpunit` in your `composer.json` file, Composer should pick latest
+compatible version automatically.
 
 ## Usage
 
