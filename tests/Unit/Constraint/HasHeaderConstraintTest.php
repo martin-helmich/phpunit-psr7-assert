@@ -26,7 +26,7 @@ class HasHeaderConstraintTest extends TestCase
         $request = new Request('POST', '/', ['x-foo' => $header]);
 
         $constraint = new HasHeaderConstraint('x-foo');
-        $constraint->evaluate($request);
+        self::assertTrue($constraint->evaluate($request, '', true));
     }
 
     /**
@@ -60,7 +60,7 @@ class HasHeaderConstraintTest extends TestCase
         $request = new Request('POST', '/', ['x-foo' => $header]);
 
         $constraint = new HasHeaderConstraint('x-foo', $header);
-        $constraint->evaluate($request);
+        self::assertTrue($constraint->evaluate($request, '', true));
     }
 
     public function testComplexConstraintsAreMatchedOnEachHeader()
@@ -69,7 +69,7 @@ class HasHeaderConstraintTest extends TestCase
         $inner   = self::equalTo('foo');
 
         $constraint = new HasHeaderConstraint('x-foo', $inner);
-        $constraint->evaluate($request);
+        self::assertTrue($constraint->evaluate($request, '', true));
     }
 
     /**
