@@ -24,7 +24,7 @@ class BodyMatchesConstraint extends Constraint
      */
     public function toString(): string
     {
-        return "message body matches " . $this->constraint->toString();
+        return 'message body matches ' . $this->constraint->toString();
     }
 
     protected function matches($other): bool
