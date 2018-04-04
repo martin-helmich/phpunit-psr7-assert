@@ -136,7 +136,14 @@ This actually asserts several facts:
    `application/json`
 2. The message body must be a valid JSON string (that means decodeable by
    `json_decode`)
-3. The encoded JSON object must match all constraints specified in the `$jsonConstraints` array. For this, the [helmich/phpunit-json-assert][json-assert] package will be used.
+3. The encoded JSON object must match all constraints specified in the
+   `$jsonConstraints` array. For this, the [helmich/phpunit-json-assert][json-assert]
+   package will be used.
+
+##### `assertMessageBodyMatchesForm($message, $formConstraints)` / `bodyMatchesForm($formConstraints)`
+
+This asserts that the message body contains `application/x-www-form-urlencoded`-encoded
+content, with individual variables matching the `$formConstraints` array.
 
 ##### `assertRequestHasMethod($request, $method)` / `hasMethod($method)`
 
