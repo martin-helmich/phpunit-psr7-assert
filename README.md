@@ -124,7 +124,9 @@ assertThat($request, hasHeaders([
 
 Asserts that the message body matches the constraint `$constraint`. If
 `$constraint` is a primitive value, the assertion will pass when the message
-body is equal to the constraint. If `$constraint` is an instance of the `PHPUnit\Framework\Constraint\Constraint` class, the constraint will be evaluated as-is.
+body is equal to the constraint. If `$constraint` is an instance of the
+`PHPUnit\Framework\Constraint\Constraint` class, the constraint will be evaluated
+as-is.
 
 ##### `assertMessageBodyMatchesJson($message, $jsonConstraints)` / `bodyMatchesJson($jsonConstraints)`
 
@@ -161,6 +163,22 @@ For the most common checks, some shorthand assertions are available:
 - `assertResponseIsSuccess($response)` / `isSuccess()` -- Status codes 200 to 299
 - `assertResponseIsClientError($response)` / `isClientError()` -- Status codes 400 to 499
 - `assertResponseIsServerError($response)` / `isServerError()` -- Status codes 500 to 599
+
+#### `assertStringIsAbsoluteUri($uri)` / `isAbsoluteUri()`
+
+Assert that the string `$uri` contains a valid absolute URL (scheme and hostname are required).
+
+#### `assertHasQueryParameter($uriOrRequest, $name[, $value])` / `hasQueryParameter($name[, $value])`
+
+Asserts that an URI contains a query parameter matching the given constraints.
+`$name` and `$value` may both be string values as well as instances of the
+`PHPUnit\Framework\Constraint\Constraint` interface.
+
+The `$uriOrRequest` value may be
+
+- a string, which will be interpreted as URI
+- an instance of the `Psr\Http\Message\UriInterface` interface
+- an instance of the `Psr\Http\Message\RequestInterface` interface 
 
 [composer-autoload]: https://getcomposer.org/doc/04-schema.md#autoload-dev
 [json-assert]: https://packagist.org/packages/helmich/phpunit-json-assert

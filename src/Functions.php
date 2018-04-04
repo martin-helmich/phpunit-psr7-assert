@@ -5,6 +5,7 @@ use Helmich\JsonAssert\Constraint\JsonValueMatchesMany;
 use Helmich\Psr7Assert\Constraint\BodyMatchesConstraint;
 use Helmich\Psr7Assert\Constraint\HasHeaderConstraint;
 use Helmich\Psr7Assert\Constraint\HasUriConstraint;
+use Helmich\Psr7Assert\Constraint\IsAbsoluteUriConstraint;
 use Helmich\Psr7Assert\Psr7Assertions;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\Constraint\Constraint;
@@ -27,6 +28,11 @@ function hasHeaders(array $constraints): Constraint
 function hasStatus($status): Constraint
 {
     return Psr7Assertions::hasStatus($status);
+}
+
+function hasQueryParameter($name, $value = null)
+{
+    return Psr7Assertions::hasQueryParameter($name, $value);
 }
 
 function isSuccess(): Constraint
@@ -93,4 +99,9 @@ function bodyMatchesJson($constraints): Constraint
             )
         )
     );
+}
+
+function isAbsoluteUri(): Constraint
+{
+    return new IsAbsoluteUriConstraint();
 }
