@@ -47,6 +47,11 @@ trait Psr7Assertions
         Assert::assertThat($message, static::bodyMatchesJson($jsonConstraints));
     }
 
+    public static function assertMessageBodyMatchesForm(MessageInterface $message, array $formConstraints)
+    {
+        Assert::assertThat($message, static::bodyMatchesForm($formConstraints));
+    }
+
     public static function assertResponseHasStatus(ResponseInterface $response, int $status)
     {
         Assert::assertThat($response, static::hasStatus($status));
@@ -95,7 +100,7 @@ trait Psr7Assertions
     /**
      * @param string $uri
      */
-    public static function assertStringIsAbsoluteUri(string $uri): void
+    public static function assertStringIsAbsoluteUri(string $uri)
     {
         Assert::assertThat($uri, static::isAbsoluteUri());
     }
@@ -105,12 +110,12 @@ trait Psr7Assertions
      * @param string|Constraint                    $name
      * @param string|Constraint|null               $value
      */
-    public static function assertHasQueryParameter($uriOrRequest, $name, $value = null): void
+    public static function assertHasQueryParameter($uriOrRequest, $name, $value = null)
     {
         Assert::assertThat($uriOrRequest, static::hasQueryParameter($name, $value));
     }
 
-    public static function assertHasQueryParameters($uriOrRequest, array $parameters): void
+    public static function assertHasQueryParameters($uriOrRequest, array $parameters)
     {
         Assert::assertThat($uriOrRequest, static::hasQueryParameters($parameters));
     }
@@ -218,6 +223,14 @@ trait Psr7Assertions
                     new JsonValueMatchesMany($constraints)
                 )
             )
+        );
+    }
+
+    public static function bodyMatchesForm(array $constraints): Constraint
+    {
+        return Assert::logicalAnd(
+            self::hasHeader('content-type', Assert::matchesRegularExpression(',^application/x-www-form-urlencoded(;.+)?$,')),
+            self::bodyMatches(new HasQueryParametersConstraint($constraints))
         );
     }
 
