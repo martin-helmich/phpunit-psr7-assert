@@ -47,6 +47,11 @@ trait Psr7Assertions
         Assert::assertThat($message, static::bodyMatchesJson($jsonConstraints));
     }
 
+    public static function assertMessageBodyMatchesForm(MessageInterface $message, array $formConstraints): void
+    {
+        Assert::assertThat($message, static::bodyMatchesForm($formConstraints));
+    }
+
     public static function assertResponseHasStatus(ResponseInterface $response, int $status): void
     {
         Assert::assertThat($response, static::hasStatus($status));
@@ -218,6 +223,14 @@ trait Psr7Assertions
                     new JsonValueMatchesMany($constraints)
                 )
             )
+        );
+    }
+
+    public static function bodyMatchesForm(array $constraints): Constraint
+    {
+        return Assert::logicalAnd(
+            self::hasHeader('content-type', Assert::matchesRegularExpression(',^application/x-www-form-urlencoded(;.+)?$,')),
+            self::bodyMatches(new HasQueryParametersConstraint($constraints))
         );
     }
 

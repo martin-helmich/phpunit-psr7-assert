@@ -106,6 +106,11 @@ function bodyMatchesJson($constraints): Constraint
     );
 }
 
+function bodyMatchesForm(array $constraints): Constraint
+{
+    return Psr7Assertions::bodyMatchesForm($constraints);
+}
+
 function isAbsoluteUri(): Constraint
 {
     return new IsAbsoluteUriConstraint();
