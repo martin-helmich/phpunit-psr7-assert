@@ -3,32 +3,19 @@ declare(strict_types = 1);
 namespace Helmich\Psr7Assert\Constraint;
 
 use PHPUnit\Framework\Constraint\Constraint;
-use PHPUnit\Framework\Constraint\IsAnything;
-use PHPUnit\Framework\Constraint\IsEqual;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\UriInterface;
 
 class HasQueryParameterConstraint extends Constraint
 {
-    private $nameMatcher;
-    private $valueMatcher;
+    /** @var UrlEncodedMatches */
+    private $inner;
 
     public function __construct($nameMatcher, $valueMatcher = null)
     {
         parent::__construct();
 
-        if (!($nameMatcher instanceof Constraint)) {
-            $nameMatcher = new IsEqual($nameMatcher);
-        }
-
-        if ($valueMatcher === null) {
-            $valueMatcher = new IsAnything();
-        } else if (!($valueMatcher instanceof Constraint)) {
-            $valueMatcher = new IsEqual($valueMatcher);
-        }
-
-        $this->nameMatcher = $nameMatcher;
-        $this->valueMatcher = $valueMatcher;
+        $this->inner = new UrlEncodedMatches($nameMatcher, $valueMatcher);
     }
 
     protected function matches($other): bool
@@ -66,26 +53,12 @@ class HasQueryParameterConstraint extends Constraint
 
     private function matchesQueryString(string $query): bool
     {
-        parse_str($query, $parsedQuery);
-
-        foreach ($parsedQuery as $key => $value) {
-            if (!$this->nameMatcher->evaluate($key, "", true)) {
-                continue;
-            }
-
-            if (!$this->valueMatcher->evaluate($value, "", true)) {
-                continue;
-            }
-
-            return true;
-        }
-
-        return false;
+        return $this->inner->evaluate($query, "", true);
     }
 
 
     public function toString(): string
     {
-        return 'has a query parameter with a name matching ' . $this->nameMatcher->toString() . ' and value matching ' . $this->valueMatcher->toString();
+        return 'query string ' . $this->inner->toString();
     }
 }

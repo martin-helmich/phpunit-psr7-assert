@@ -2,11 +2,8 @@
 declare(strict_types = 1);
 namespace Helmich\Psr7Assert\Tests\Unit\Constraint;
 
-use GuzzleHttp\Psr7\Request;
-use Helmich\Psr7Assert\Constraint\HasQueryParameterConstraint;
 use Helmich\Psr7Assert\Constraint\HasQueryParametersConstraint;
 use PHPUnit\Framework\TestCase;
-use function GuzzleHttp\Psr7\uri_for;
 
 class HasQueryParametersConstraintTest extends TestCase
 {

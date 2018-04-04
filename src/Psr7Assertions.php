@@ -11,6 +11,7 @@ use Helmich\Psr7Assert\Constraint\HasQueryParametersConstraint;
 use Helmich\Psr7Assert\Constraint\HasStatusConstraint;
 use Helmich\Psr7Assert\Constraint\HasUriConstraint;
 use Helmich\Psr7Assert\Constraint\IsAbsoluteUriConstraint;
+use Helmich\Psr7Assert\Constraint\UrlEncodedMatchesMany;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\Constraint\Constraint;
 use PHPUnit\Framework\Constraint\IsEqual;
@@ -230,7 +231,7 @@ trait Psr7Assertions
     {
         return Assert::logicalAnd(
             self::hasHeader('content-type', Assert::matchesRegularExpression(',^application/x-www-form-urlencoded(;.+)?$,')),
-            self::bodyMatches(new HasQueryParametersConstraint($constraints))
+            self::bodyMatches(new UrlEncodedMatchesMany($constraints))
         );
     }
 
