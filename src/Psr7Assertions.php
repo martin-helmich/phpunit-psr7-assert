@@ -6,14 +6,17 @@ use Helmich\JsonAssert\Constraint\JsonValueMatchesMany;
 use Helmich\Psr7Assert\Constraint\BodyMatchesConstraint;
 use Helmich\Psr7Assert\Constraint\HasHeaderConstraint;
 use Helmich\Psr7Assert\Constraint\HasMethodConstraint;
+use Helmich\Psr7Assert\Constraint\HasQueryParameterConstraint;
 use Helmich\Psr7Assert\Constraint\HasStatusConstraint;
 use Helmich\Psr7Assert\Constraint\HasUriConstraint;
+use Helmich\Psr7Assert\Constraint\IsAbsoluteUriConstraint;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\Constraint\Constraint;
 use PHPUnit\Framework\Constraint\IsEqual;
 use Psr\Http\Message\MessageInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\UriInterface;
 
 trait Psr7Assertions
 {
@@ -86,6 +89,24 @@ trait Psr7Assertions
     public static function assertRequestIsDelete(RequestInterface $request): void
     {
         Assert::assertThat($request, static::isDelete());
+    }
+
+    /**
+     * @param string $uri
+     */
+    public static function assertStringIsAbsoluteUri(string $uri): void
+    {
+        Assert::assertThat($uri, static::isAbsoluteUri());
+    }
+
+    /**
+     * @param string|UriInterface|RequestInterface $uriOrRequest
+     * @param string|Constraint                    $name
+     * @param string|Constraint|null               $value
+     */
+    public static function assertHasQueryParameter($uriOrRequest, $name, $value = null): void
+    {
+        Assert::assertThat($uriOrRequest, static::hasQueryParameter($name, $value));
     }
 
     public static function hasUri(string $uri): Constraint
@@ -166,6 +187,16 @@ trait Psr7Assertions
         return new BodyMatchesConstraint($constraint);
     }
 
+    /**
+     * @param string|Constraint      $name
+     * @param string|Constraint|null $value
+     * @return Constraint
+     */
+    public static function hasQueryParameter($name, $value = null): Constraint
+    {
+        return new HasQueryParameterConstraint($name, $value);
+    }
+
     public static function bodyMatchesJson(array $constraints): Constraint
     {
         return Assert::logicalAnd(
@@ -177,5 +208,13 @@ trait Psr7Assertions
                 )
             )
         );
+    }
+
+    /**
+     * @return Constraint
+     */
+    public static function isAbsoluteUri(): Constraint
+    {
+        return new IsAbsoluteUriConstraint();
     }
 }
