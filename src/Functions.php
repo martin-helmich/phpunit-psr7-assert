@@ -30,9 +30,14 @@ function hasStatus($status): Constraint
     return Psr7Assertions::hasStatus($status);
 }
 
-function hasQueryParameter($name, $value = null)
+function hasQueryParameter($name, $value = null): Constraint
 {
     return Psr7Assertions::hasQueryParameter($name, $value);
+}
+
+function hasQueryParameters(array $constraints): Constraint
+{
+    return Psr7Assertions::hasQueryParameters($constraints);
 }
 
 function isSuccess(): Constraint

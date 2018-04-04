@@ -7,6 +7,7 @@ use Helmich\Psr7Assert\Constraint\BodyMatchesConstraint;
 use Helmich\Psr7Assert\Constraint\HasHeaderConstraint;
 use Helmich\Psr7Assert\Constraint\HasMethodConstraint;
 use Helmich\Psr7Assert\Constraint\HasQueryParameterConstraint;
+use Helmich\Psr7Assert\Constraint\HasQueryParametersConstraint;
 use Helmich\Psr7Assert\Constraint\HasStatusConstraint;
 use Helmich\Psr7Assert\Constraint\HasUriConstraint;
 use Helmich\Psr7Assert\Constraint\IsAbsoluteUriConstraint;
@@ -109,6 +110,11 @@ trait Psr7Assertions
         Assert::assertThat($uriOrRequest, static::hasQueryParameter($name, $value));
     }
 
+    public static function assertHasQueryParameters($uriOrRequest, array $parameters): void
+    {
+        Assert::assertThat($uriOrRequest, static::hasQueryParameters($parameters));
+    }
+
     public static function hasUri(string $uri): Constraint
     {
         return new HasUriConstraint($uri);
@@ -195,6 +201,11 @@ trait Psr7Assertions
     public static function hasQueryParameter($name, $value = null): Constraint
     {
         return new HasQueryParameterConstraint($name, $value);
+    }
+
+    public static function hasQueryParameters(array $parameters): Constraint
+    {
+        return new HasQueryParametersConstraint($parameters);
     }
 
     public static function bodyMatchesJson(array $constraints): Constraint
