@@ -17,8 +17,6 @@ class HasHeaderConstraint extends Constraint
 
     public function __construct(string $name, $constraint = null)
     {
-        parent::__construct();
-
         if ($constraint === null) {
             $constraint = Assert::logicalNot(Assert::isEmpty());
         } elseif (!$constraint instanceof Constraint) {

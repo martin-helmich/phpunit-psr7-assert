@@ -14,8 +14,6 @@ class HasStatusConstraint extends Constraint
 
     public function __construct($status)
     {
-        parent::__construct();
-
         if (!$status instanceof Constraint) {
             $status = Assert::equalTo($status);
         }

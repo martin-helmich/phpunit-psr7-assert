@@ -6,6 +6,7 @@ use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use Helmich\Psr7Assert\Constraint\HasStatusConstraint;
 use PHPUnit\Framework\Assert;
+use PHPUnit\Framework\AssertionFailedError;
 use PHPUnit\Framework\TestCase;
 
 class HasStatusConstraintTest extends TestCase
@@ -27,33 +28,30 @@ class HasStatusConstraintTest extends TestCase
         self::assertTrue($constraint->evaluate($response, '', true));
     }
 
-    /**
-     * @expectedException \PHPUnit\Framework\AssertionFailedError
-     */
     public function testMethodIsEvaluatedForEqualityAndCanFail()
     {
+        $this->expectException(AssertionFailedError::class);
+
         $response = new Response(404);
 
         $constraint = new HasStatusConstraint(200);
         $constraint->evaluate($response);
     }
 
-    /**
-     * @expectedException \PHPUnit\Framework\AssertionFailedError
-     */
     public function testStatusCanBeAnyConstraintAndCanFail()
     {
+        $this->expectException(AssertionFailedError::class);
+
         $response = new Response(234);
 
         $constraint = new HasStatusConstraint(Assert::greaterThanOrEqual(300));
         $constraint->evaluate($response);
     }
 
-    /**
-     * @expectedException \PHPUnit\Framework\AssertionFailedError
-     */
     public function testNonMessagesAreNotEvaluated()
     {
+        $this->expectException(AssertionFailedError::class);
+
         $constraint = new HasStatusConstraint(200);
         $constraint->evaluate(new Request('POST', '/foo'));
     }

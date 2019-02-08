@@ -5,6 +5,7 @@ namespace Helmich\Psr7Assert\Tests\Functional;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\Assert;
+use PHPUnit\Framework\AssertionFailedError;
 use PHPUnit\Framework\TestCase;
 
 class FunctionalConstraintTest extends TestCase
@@ -16,11 +17,10 @@ class FunctionalConstraintTest extends TestCase
         assertThat($request, hasUri('/foo'));
     }
 
-    /**
-     * @expectedException \PHPUnit\Framework\AssertionFailedError
-     */
     public function testHasUriCanFail()
     {
+        $this->expectException(AssertionFailedError::class);
+
         $request = new Request('GET', '/foo');
         assertThat($request, hasUri('/bar'));
     }
@@ -31,20 +31,18 @@ class FunctionalConstraintTest extends TestCase
         assertThat($request, hasHeader('X-Foo', 'bar'));
     }
 
-    /**
-     * @expectedException \PHPUnit\Framework\AssertionFailedError
-     */
     public function testHasHeaderCanFailWithPrimitiveValue()
     {
+        $this->expectException(AssertionFailedError::class);
+
         $request = new Request('GET', '/', ['x-foo' => 'baz']);
         assertThat($request, hasHeader('X-Foo', 'bar'));
     }
 
-    /**
-     * @expectedException \PHPUnit\Framework\AssertionFailedError
-     */
     public function testHasHeaderCanFailWithNonExistingHeader()
     {
+        $this->expectException(AssertionFailedError::class);
+
         $request = new Request('GET', '/', []);
         assertThat($request, hasHeader('X-Foo', 'bar'));
     }
@@ -64,11 +62,10 @@ class FunctionalConstraintTest extends TestCase
         ]));
     }
 
-    /**
-     * @expectedException \PHPUnit\Framework\AssertionFailedError
-     */
     public function testHasHeaderCanFailWithConstraint()
     {
+        $this->expectException(AssertionFailedError::class);
+
         $request = new Request('GET', '/', ['x-foo' => 4]);
         assertThat($request, hasHeader('X-Foo', greaterThanOrEqual(10)));
     }
@@ -79,11 +76,10 @@ class FunctionalConstraintTest extends TestCase
         assertThat($request, bodyMatches(equalTo('foobar')));
     }
 
-    /**
-     * @expectedException \PHPUnit\Framework\AssertionFailedError
-     */
     public function testBodyMatchesCanFail()
     {
+        $this->expectException(AssertionFailedError::class);
+
         $request = new Request('GET', '/', [], 'foobar');
         assertThat($request, bodyMatches(equalTo('barbaz')));
     }
@@ -121,11 +117,10 @@ class FunctionalConstraintTest extends TestCase
         assertThat(new Request('GET', '/'), isGet());
     }
 
-    /**
-     * @expectedException \PHPUnit\Framework\AssertionFailedError
-     */
     public function testIsGetCanFail()
     {
+        $this->expectException(AssertionFailedError::class);
+
         assertThat(new Request('POST', '/'), isGet());
     }
 
@@ -134,11 +129,10 @@ class FunctionalConstraintTest extends TestCase
         assertThat(new Request('POST', '/'), isPost());
     }
 
-    /**
-     * @expectedException \PHPUnit\Framework\AssertionFailedError
-     */
     public function testIsPostCanFail()
     {
+        $this->expectException(AssertionFailedError::class);
+
         assertThat(new Request('GET', '/'), isPost());
     }
 
@@ -147,11 +141,10 @@ class FunctionalConstraintTest extends TestCase
         assertThat(new Request('PUT', '/'), isPut());
     }
 
-    /**
-     * @expectedException \PHPUnit\Framework\AssertionFailedError
-     */
     public function testIsPutCanFail()
     {
+        $this->expectException(AssertionFailedError::class);
+
         assertThat(new Request('GET', '/'), isPut());
     }
 
@@ -160,11 +153,10 @@ class FunctionalConstraintTest extends TestCase
         assertThat(new Request('DELETE', '/'), isDelete());
     }
 
-    /**
-     * @expectedException \PHPUnit\Framework\AssertionFailedError
-     */
     public function testIsDeleteCanFail()
     {
+        $this->expectException(AssertionFailedError::class);
+
         assertThat(new Request('POST', '/'), isDelete());
     }
 
@@ -186,11 +178,10 @@ class FunctionalConstraintTest extends TestCase
         assertThat(new Response($status), hasStatus($status));
     }
 
-    /**
-     * @expectedException \PHPUnit\Framework\AssertionFailedError
-     */
     public function testHasStatusCanFail()
     {
+        $this->expectException(AssertionFailedError::class);
+
         assertThat(new Response(400), hasStatus(200));
     }
 
@@ -199,11 +190,10 @@ class FunctionalConstraintTest extends TestCase
         assertThat(new Response(200), isSuccess());
     }
 
-    /**
-     * @expectedException \PHPUnit\Framework\AssertionFailedError
-     */
     public function testIsSuccessCanFail()
     {
+        $this->expectException(AssertionFailedError::class);
+
         assertThat(new Response(404), isSuccess());
     }
 
@@ -212,11 +202,10 @@ class FunctionalConstraintTest extends TestCase
         assertThat(new Response(404), isClientError());
     }
 
-    /**
-     * @expectedException \PHPUnit\Framework\AssertionFailedError
-     */
     public function testIsClientErrorCanFail()
     {
+        $this->expectException(AssertionFailedError::class);
+
         assertThat(new Response(200), isClientError());
     }
 
@@ -225,11 +214,10 @@ class FunctionalConstraintTest extends TestCase
         assertThat(new Response(503), isServerError());
     }
 
-    /**
-     * @expectedException \PHPUnit\Framework\AssertionFailedError
-     */
     public function testIsServerErrorCanFail()
     {
+        $this->expectException(AssertionFailedError::class);
+
         assertThat(new Response(200), isServerError());
     }
 
