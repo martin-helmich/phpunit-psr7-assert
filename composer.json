@@ -8,20 +8,14 @@
             "email": "m.helmich@mittwald.de"
         }
     ],
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/martinssipenko/phpunit-json-assert"
-        }
-    ],
     "require": {
         "php": "^7.1",
-        "helmich/phpunit-json-assert": "dev-master@dev",
+        "helmich/phpunit-json-assert": "^3.0",
         "psr/http-message": "^1.0"
     },
     "require-dev": {
         "guzzlehttp/psr7": "^1.2",
-        "phpunit/phpunit": "^7.0 | ^8.0"
+        "phpunit/phpunit": "^8.0"
     },
     "autoload": {
         "psr-4": {
