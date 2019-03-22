@@ -10,13 +10,16 @@
     ],
     "require": {
         "psr/http-message": "^1.0",
-        "phpunit/phpunit": "^7.0",
         "helmich/phpunit-json-assert": "^2.0",
         "php": ">=7.1"
     },
     "require-dev": {
         "guzzlehttp/psr7": "^1.2",
+        "phpunit/phpunit": "^7.0",
         "codeclimate/php-test-reporter": "dev-master"
+    },
+    "conflict": {
+        "phpunit/phpunit": "<7.0 || >= 8.0"
     },
     "autoload": {
         "psr-4": {
