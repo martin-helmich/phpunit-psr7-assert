@@ -27,7 +27,7 @@ easy overview:
 | PSR-7 assertion version | PHPUnit 4 | PHPUnit 5 | PHPUnit 6 | PHPUnit 7 | PHPUnit 8 |
 | ----------------------- | --------- | --------- | --------- | --------- | --------- |
 | v1 (branch `v1`), **unsupported** | :white_check_mark: | :white_check_mark: | :no_entry_sign: | :no_entry_sign: | :no_entry_sign: |
-| v2 (branch `v2`) | :no_entry_sign: | :no_entry_sign: | :white_check_mark: | :no_entry_sign: | :no_entry_sign: |
+| v2 (branch `v2`), **unsupported** | :no_entry_sign: | :no_entry_sign: | :white_check_mark: | :no_entry_sign: | :no_entry_sign: |
 | v3 (branch `v3`) | :no_entry_sign: | :no_entry_sign: | :no_entry_sign: | :white_check_mark: | :no_entry_sign: |
 | v4 (branch `master`) | :no_entry_sign: | :no_entry_sign: | :no_entry_sign: | :no_entry_sign: | :white_check_mark: |
 
