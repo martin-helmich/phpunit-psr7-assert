@@ -10,8 +10,6 @@ class UrlEncodedMatchesMany extends Constraint
 
     public function __construct(array $constraints)
     {
-        parent::__construct();
-
         foreach ($constraints as $key => $value) {
             $this->constraints[] = new UrlEncodedMatches($key, $value);
         }

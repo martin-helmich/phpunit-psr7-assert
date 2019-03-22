@@ -13,7 +13,6 @@ class HasUriConstraint extends Constraint
 
     public function __construct(string $uri)
     {
-        parent::__construct();
         $this->uri = $uri;
     }
 

@@ -4,6 +4,7 @@ namespace Helmich\Psr7Assert\Tests\Unit\Constraint;
 
 use GuzzleHttp\Psr7\Request;
 use Helmich\Psr7Assert\Constraint\HasHeaderConstraint;
+use PHPUnit\Framework\AssertionFailedError;
 use PHPUnit\Framework\TestCase;
 
 class HasHeaderConstraintTest extends TestCase
@@ -29,22 +30,20 @@ class HasHeaderConstraintTest extends TestCase
         self::assertTrue($constraint->evaluate($request, '', true));
     }
 
-    /**
-     * @expectedException \PHPUnit\Framework\AssertionFailedError
-     */
     public function testDefaultConstraintFailsWhenHeaderIsEmpty()
     {
+        $this->expectException(AssertionFailedError::class);
+
         $request = new Request('POST', '/', ['x-foo' => '']);
 
         $constraint = new HasHeaderConstraint('x-foo');
         $constraint->evaluate($request);
     }
 
-    /**
-     * @expectedException \PHPUnit\Framework\AssertionFailedError
-     */
     public function testDefaultConstraintFailsWhenHeaderIsNotSet()
     {
+        $this->expectException(AssertionFailedError::class);
+
         $request = new Request('POST', '/');
 
         $constraint = new HasHeaderConstraint('x-foo');
@@ -72,11 +71,10 @@ class HasHeaderConstraintTest extends TestCase
         self::assertTrue($constraint->evaluate($request, '', true));
     }
 
-    /**
-     * @expectedException \PHPUnit\Framework\AssertionFailedError
-     */
     public function testComplexConstraintsAreMatchedOnEachHeaderAndCanFail()
     {
+        $this->expectException(AssertionFailedError::class);
+
         $request = new Request('POST', '/', ['x-foo' => ['foo', 'bar']]);
         $inner   = self::equalTo('baz');
 
@@ -84,11 +82,10 @@ class HasHeaderConstraintTest extends TestCase
         $constraint->evaluate($request);
     }
 
-    /**
-     * @expectedException \PHPUnit\Framework\AssertionFailedError
-     */
     public function testNonMessagesAreNotEvaluated()
     {
+        $this->expectException(AssertionFailedError::class);
+
         $constraint = new HasHeaderConstraint('x-foo');
         $constraint->evaluate('Ho, ho, ho');
     }

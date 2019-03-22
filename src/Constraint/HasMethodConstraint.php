@@ -13,7 +13,6 @@ class HasMethodConstraint extends Constraint
 
     public function __construct(string $method)
     {
-        parent::__construct();
         $this->method = $method;
     }
 

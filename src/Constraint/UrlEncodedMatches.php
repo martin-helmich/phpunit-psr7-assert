@@ -12,8 +12,6 @@ class UrlEncodedMatches extends Constraint
 
     public function __construct($nameMatcher, $valueMatcher = null)
     {
-        parent::__construct();
-
         if (!($nameMatcher instanceof Constraint)) {
             $nameMatcher = new IsEqual($nameMatcher);
         }

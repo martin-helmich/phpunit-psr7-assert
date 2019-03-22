@@ -9,17 +9,16 @@
         }
     ],
     "require": {
-        "psr/http-message": "^1.0",
-        "helmich/phpunit-json-assert": "^2.0",
-        "php": ">=7.1"
+        "php": "^7.1",
+        "helmich/phpunit-json-assert": "^3.0",
+        "psr/http-message": "^1.0"
     },
     "require-dev": {
         "guzzlehttp/psr7": "^1.2",
-        "phpunit/phpunit": "^7.0",
-        "codeclimate/php-test-reporter": "dev-master"
+        "phpunit/phpunit": "^8.0"
     },
     "conflict": {
-        "phpunit/phpunit": "<7.0 || >= 8.0"
+        "phpunit/phpunit": "<8.0 || >= 9.0"
     },
     "autoload": {
         "psr-4": {
@@ -32,5 +31,8 @@
             "vendor/helmich/phpunit-json-assert/src/Functions.php",
             "src/Functions.php"
         ]
+    },
+    "config": {
+        "sort-packages": true
     }
 }

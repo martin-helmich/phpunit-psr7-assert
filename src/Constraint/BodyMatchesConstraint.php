@@ -13,7 +13,6 @@ class BodyMatchesConstraint extends Constraint
 
     public function __construct(Constraint $constraint)
     {
-        parent::__construct();
         $this->constraint = $constraint;
     }
 
