@@ -14,7 +14,7 @@ class HasQueryParameterConstraintTest extends TestCase
         $url = "https://some-domain.example/foo?bar=baz";
         $constraint = new HasQueryParameterConstraint("bar", "baz");
 
-        assertThat($constraint->evaluate($url, "", true), isTrue());
+        self::assertThat($constraint->evaluate($url, "", true), self::isTrue());
     }
 
     public function testMatchesStringUrlsNegative()
@@ -22,7 +22,7 @@ class HasQueryParameterConstraintTest extends TestCase
         $url = "https://some-domain.example/foo?bar=baz";
         $constraint = new HasQueryParameterConstraint("tulpen", "bunt");
 
-        assertThat($constraint->evaluate($url, "", true), isFalse());
+        self::assertThat($constraint->evaluate($url, "", true), self::isFalse());
     }
 
     public function testMatchesPsr7Uris()
@@ -30,7 +30,7 @@ class HasQueryParameterConstraintTest extends TestCase
         $uri = uri_for("https://some-domain.example/foo?bar=baz");
         $constraint = new HasQueryParameterConstraint("bar", "baz");
 
-        assertThat($constraint->evaluate($uri, "", true), isTrue());
+        self::assertThat($constraint->evaluate($uri, "", true), self::isTrue());
     }
 
     public function testMatchesPsr7UrisNegative()
@@ -38,7 +38,7 @@ class HasQueryParameterConstraintTest extends TestCase
         $uri = uri_for("https://some-domain.example/foo?autobahn=1");
         $constraint = new HasQueryParameterConstraint("bar", "baz");
 
-        assertThat($constraint->evaluate($uri, "", true), isFalse());
+        self::assertThat($constraint->evaluate($uri, "", true), self::isFalse());
     }
 
     public function testMatchesRequest()
@@ -48,6 +48,6 @@ class HasQueryParameterConstraintTest extends TestCase
 
         $constraint = new HasQueryParameterConstraint("bar", "baz");
 
-        assertThat($constraint->evaluate($request, "", true), isTrue());
+        self::assertThat($constraint->evaluate($request, "", true), self::isTrue());
     }
 }

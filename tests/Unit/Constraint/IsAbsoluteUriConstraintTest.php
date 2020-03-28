@@ -35,7 +35,7 @@ class IsAbsoluteUriConstraintTest extends TestCase
     public function testValidUrlMatches($validUrl)
     {
         $constraint = new IsAbsoluteUriConstraint();
-        assertThat($constraint->evaluate($validUrl, "", true), isTrue());
+        self::assertThat($constraint->evaluate($validUrl, "", true), self::isTrue());
     }
 
     /**
@@ -45,6 +45,6 @@ class IsAbsoluteUriConstraintTest extends TestCase
     public function testInvalidUrlDoesNotMatch($invalidUrl)
     {
         $constraint = new IsAbsoluteUriConstraint();
-        assertThat($constraint->evaluate($invalidUrl, "", true), isFalse());
+        self::assertThat($constraint->evaluate($invalidUrl, "", true), self::isFalse());
     }
 }
