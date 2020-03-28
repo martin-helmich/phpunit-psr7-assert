@@ -27,7 +27,6 @@
     },
     "autoload-dev": {
         "files": [
-            "vendor/phpunit/phpunit/src/Framework/Assert/Functions.php",
             "vendor/helmich/phpunit-json-assert/src/Functions.php",
             "src/Functions.php"
         ]

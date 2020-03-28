@@ -15,7 +15,7 @@ class HasQueryParametersConstraintTest extends TestCase
             "baz" => "bar"
         ]);
 
-        assertThat($constraint->evaluate($url, "", true), isTrue());
+        self::assertThat($constraint->evaluate($url, "", true), self::isTrue());
     }
 
     public function testMatchesStringUrlsNegative()
@@ -26,6 +26,6 @@ class HasQueryParametersConstraintTest extends TestCase
             "baz" => "bar"
         ]);
 
-        assertThat($constraint->evaluate($url, "", true), isFalse());
+        self::assertThat($constraint->evaluate($url, "", true), self::isFalse());
     }
 }
