@@ -10,7 +10,7 @@
     ],
     "require": {
         "php": "^7.1",
-        "helmich/phpunit-json-assert": "^3.0",
+        "helmich/phpunit-json-assert": "^3.1",
         "psr/http-message": "^1.0"
     },
     "require-dev": {
