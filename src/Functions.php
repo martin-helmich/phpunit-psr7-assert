@@ -45,6 +45,11 @@ function isSuccess(): Constraint
     return Psr7Assertions::isSuccess();
 }
 
+function isRedirect(): Constraint
+{
+    return Psr7Assertions::isRedirect();
+}
+
 function isClientError(): Constraint
 {
     return Psr7Assertions::isClientError();
