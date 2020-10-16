@@ -188,6 +188,7 @@ assertThat($response, hasStatus(logicalAnd(greaterThanOrEqual(200), lessThan(400
 For the most common checks, some shorthand assertions are available:
 
 - `assertResponseIsSuccess($response)` / `isSuccess()` -- Status codes 200 to 299
+- `assertResponseIsRedirect($response)` / `isRedirect()` -- Status codes 300 to 399
 - `assertResponseIsClientError($response)` / `isClientError()` -- Status codes 400 to 499
 - `assertResponseIsServerError($response)` / `isServerError()` -- Status codes 500 to 599
 

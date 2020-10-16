@@ -209,6 +209,18 @@ class ConstraintTest extends TestCase
         $this->assertResponseIsSuccess(new Response(404));
     }
 
+    public function testIsRedirectCanSucceed()
+    {
+        $this->assertResponseIsRedirect(new Response(300));
+    }
+
+    public function testIsRedirectCanFail()
+    {
+        $this->expectException(AssertionFailedError::class);
+
+        $this->assertResponseIsRedirect(new Response(200));
+    }
+
     public function testIsClientErrorCanSucceed()
     {
         $this->assertResponseIsClientError(new Response(404));

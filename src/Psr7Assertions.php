@@ -63,6 +63,11 @@ trait Psr7Assertions
         Assert::assertThat($response, static::isSuccess());
     }
 
+    public static function assertResponseIsRedirect(ResponseInterface $response): void
+    {
+        Assert::assertThat($response, static::isRedirect());
+    }
+
     public static function assertResponseIsClientError(ResponseInterface $response): void
     {
         Assert::assertThat($response, static::isClientError());
@@ -139,6 +144,11 @@ trait Psr7Assertions
     public static function isSuccess(): Constraint
     {
         return new HasStatusConstraint(Assert::logicalAnd(Assert::greaterThanOrEqual(200), Assert::lessThan(300)));
+    }
+
+    public static function isRedirect(): Constraint
+    {
+        return new HasStatusConstraint(Assert::logicalAnd(Assert::greaterThanOrEqual(300), Assert::lessThan(400)));
     }
 
     public static function isClientError(): Constraint
