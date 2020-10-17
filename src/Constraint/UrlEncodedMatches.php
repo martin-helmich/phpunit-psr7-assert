@@ -18,7 +18,7 @@ class UrlEncodedMatches extends Constraint
 
         if ($valueMatcher === null) {
             $valueMatcher = new IsAnything();
-        } else if (!($valueMatcher instanceof Constraint)) {
+        } elseif (!($valueMatcher instanceof Constraint)) {
             $valueMatcher = new IsEqual($valueMatcher);
         }
 
@@ -31,15 +31,12 @@ class UrlEncodedMatches extends Constraint
         parse_str($other, $parsedQuery);
 
         foreach ($parsedQuery as $key => $value) {
-            if (!$this->nameMatcher->evaluate($key, "", true)) {
-                continue;
-            }
+            $nameMatches = $this->nameMatcher->evaluate($key, "", true);
+            $valueMatches = $this->valueMatcher->evaluate($value, "", true);
 
-            if (!$this->valueMatcher->evaluate($value, "", true)) {
-                continue;
+            if ($nameMatches && $valueMatches) {
+                return true;
             }
-
-            return true;
         }
 
         return false;
@@ -49,6 +46,5 @@ class UrlEncodedMatches extends Constraint
     {
         return 'contains a name matching ' . $this->nameMatcher->toString() . ' and value matching ' . $this->valueMatcher->toString();
     }
-
 
 }
