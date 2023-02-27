@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 class IsAbsoluteUriConstraintTest extends TestCase
 {
-    public function validUrls(): array {
+    public static function validUrls(): array {
         return [
             ["http://google.de"],
             ["http://localhost"],

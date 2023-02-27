@@ -15,6 +15,8 @@
     },
     "require-dev": {
         "guzzlehttp/psr7": "^1.2",
+        "phpspec/prophecy": "^1.17",
+        "phpspec/prophecy-phpunit": "^2.0",
         "phpunit/phpunit": "^8.0 || ^9.0 || ^10.0"
     },
     "conflict": {

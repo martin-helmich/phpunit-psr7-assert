@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 class HasHeaderConstraintTest extends TestCase
 {
 
-    public function dataForHeaderValues()
+    public static function dataForHeaderValues()
     {
         return [
             ['foo'],

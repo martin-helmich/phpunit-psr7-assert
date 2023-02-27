@@ -6,11 +6,13 @@ use GuzzleHttp\Psr7\Request;
 use Helmich\Psr7Assert\Constraint\BodyMatchesConstraint;
 use PHPUnit\Framework\Constraint\Constraint;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 class BodyMatchesConstraintTest extends TestCase
 {
+    use ProphecyTrait;
 
-    public function dataForBadTypes()
+    public static function dataForBadTypes()
     {
         return [
             ['foo'],
@@ -31,7 +33,7 @@ class BodyMatchesConstraintTest extends TestCase
         self::assertThat($constraint->evaluate($var, '', true), self::isFalse());
     }
 
-    public function dataForInnerConstraintIsEvaluatedWithMessageContent()
+    public static function dataForInnerConstraintIsEvaluatedWithMessageContent()
     {
         return [
             [uniqid(), true],
