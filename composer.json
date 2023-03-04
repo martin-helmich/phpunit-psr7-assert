@@ -15,12 +15,11 @@
     },
     "require-dev": {
         "guzzlehttp/psr7": "^1.2",
-        "phpspec/prophecy": "^1.17",
-        "phpspec/prophecy-phpunit": "^2.0",
-        "phpunit/phpunit": "^9.0 || ^10.0"
+        "mockery/mockery": "^1.4.1",
+        "phpunit/phpunit": "^8.0 || ^9.0 || ^10.0"
     },
     "conflict": {
-        "phpunit/phpunit": "<9.0 || >= 11.0"
+        "phpunit/phpunit": "<8.0 || >= 11.0"
     },
     "autoload": {
         "psr-4": {

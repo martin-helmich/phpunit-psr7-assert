@@ -102,7 +102,7 @@ class ConstraintTest extends TestCase
         $this->assertMessageBodyMatchesJson($request, array('$.foo' => 'bar'));
     }
 
-    public function dataForRequestMethods()
+    public static function dataForRequestMethods()
     {
         return [
             ['GET'],
@@ -172,7 +172,7 @@ class ConstraintTest extends TestCase
         $this->assertRequestIsDelete(new Request('POST', '/'));
     }
 
-    public function dataForStatusCodes()
+    public static function dataForStatusCodes()
     {
         return [
             [200],

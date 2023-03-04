@@ -21,7 +21,7 @@ class IsAbsoluteUriConstraintTest extends TestCase
         ];
     }
 
-    public function invalidUrls(): array {
+    public static function invalidUrls(): array {
         return [
             ["http://"],
             ["asdfasdf"],
