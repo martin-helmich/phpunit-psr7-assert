@@ -24,12 +24,12 @@ There are several release branches of this library, each of these being compatib
 with different releases of PHPUnit and PHP. The following table should give an
 easy overview:
 
-| PSR-7 assertion version | PHPUnit 4 | PHPUnit 5 | PHPUnit 6 | PHPUnit 7 | PHPUnit 8 | PHPUnit 9 |
-| ----------------------- | --------- | --------- | --------- | --------- | --------- | --------- |
-| v1 (branch `v1`), **unsupported** | :white_check_mark: | :white_check_mark: | :no_entry_sign: | :no_entry_sign: | :no_entry_sign: | :no_entry_sign: |
-| v2 (branch `v2`), **unsupported** | :no_entry_sign: | :no_entry_sign: | :white_check_mark: | :no_entry_sign: | :no_entry_sign: | :no_entry_sign: |
-| v3 (branch `v3`) | :no_entry_sign: | :no_entry_sign: | :no_entry_sign: | :white_check_mark: | :no_entry_sign: | :no_entry_sign: |
-| v4 (branch `master`) | :no_entry_sign: | :no_entry_sign: | :no_entry_sign: | :no_entry_sign: | :white_check_mark: | :white_check_mark: |
+| PSR-7 assertion version | PHPUnit 4 | PHPUnit 5 | PHPUnit 6 | PHPUnit 7 | PHPUnit 8 | PHPUnit 9 | PHPUnit 10 |
+| ----------------------- | --------- | --------- | --------- | --------- | --------- | --------- | ---------- |
+| v1 (branch `v1`), **unsupported** | :white_check_mark: | :white_check_mark: | :no_entry_sign: | :no_entry_sign: | :no_entry_sign: | :no_entry_sign: | :no_entry_sign: |
+| v2 (branch `v2`), **unsupported** | :no_entry_sign: | :no_entry_sign: | :white_check_mark: | :no_entry_sign: | :no_entry_sign: | :no_entry_sign: | :no_entry_sign: |
+| v3 (branch `v3`) | :no_entry_sign: | :no_entry_sign: | :no_entry_sign: | :white_check_mark: | :no_entry_sign: | :no_entry_sign: | :no_entry_sign: |
+| v4 (branch `master`) | :no_entry_sign: | :no_entry_sign: | :no_entry_sign: | :no_entry_sign: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 
 When you are using `composer require` and have already declared a dependency to
 `phpunit/phpunit` in your `composer.json` file, Composer should pick latest

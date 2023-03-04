@@ -6,7 +6,7 @@ use Helmich\Psr7Assert\Constraint\BodyMatchesConstraint;
 use Helmich\Psr7Assert\Constraint\HasHeaderConstraint;
 use Helmich\Psr7Assert\Constraint\HasUriConstraint;
 use Helmich\Psr7Assert\Constraint\IsAbsoluteUriConstraint;
-use Helmich\Psr7Assert\Psr7Assertions;
+use Helmich\Psr7Assert\Psr7AssertionsClass;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\Constraint\Constraint;
 
@@ -22,42 +22,42 @@ function hasHeader(string $name, $constraint = null): HasHeaderConstraint
 
 function hasHeaders(array $constraints): Constraint
 {
-    return Psr7Assertions::hasHeaders($constraints);
+    return Psr7AssertionsClass::hasHeaders($constraints);
 }
 
 function hasStatus($status): Constraint
 {
-    return Psr7Assertions::hasStatus($status);
+    return Psr7AssertionsClass::hasStatus($status);
 }
 
 function hasQueryParameter($name, $value = null): Constraint
 {
-    return Psr7Assertions::hasQueryParameter($name, $value);
+    return Psr7AssertionsClass::hasQueryParameter($name, $value);
 }
 
 function hasQueryParameters(array $constraints): Constraint
 {
-    return Psr7Assertions::hasQueryParameters($constraints);
+    return Psr7AssertionsClass::hasQueryParameters($constraints);
 }
 
 function isSuccess(): Constraint
 {
-    return Psr7Assertions::isSuccess();
+    return Psr7AssertionsClass::isSuccess();
 }
 
 function isRedirect(): Constraint
 {
-    return Psr7Assertions::isRedirect();
+    return Psr7AssertionsClass::isRedirect();
 }
 
 function isClientError(): Constraint
 {
-    return Psr7Assertions::isClientError();
+    return Psr7AssertionsClass::isClientError();
 }
 
 function isServerError(): Constraint
 {
-    return Psr7Assertions::isServerError();
+    return Psr7AssertionsClass::isServerError();
 }
 
 function hasContentType(string $contentType): Constraint
@@ -70,27 +70,27 @@ function hasContentType(string $contentType): Constraint
 
 function hasMethod(string $method): Constraint
 {
-    return Psr7Assertions::hasMethod($method);
+    return Psr7AssertionsClass::hasMethod($method);
 }
 
 function isGet(): Constraint
 {
-    return Psr7Assertions::isGet();
+    return Psr7AssertionsClass::isGet();
 }
 
 function isPost(): Constraint
 {
-    return Psr7Assertions::isPost();
+    return Psr7AssertionsClass::isPost();
 }
 
 function isPut(): Constraint
 {
-    return Psr7Assertions::isPut();
+    return Psr7AssertionsClass::isPut();
 }
 
 function isDelete(): Constraint
 {
-    return Psr7Assertions::isDelete();
+    return Psr7AssertionsClass::isDelete();
 }
 
 function bodyMatches($constraint): Constraint
@@ -113,7 +113,7 @@ function bodyMatchesJson($constraints): Constraint
 
 function bodyMatchesForm(array $constraints): Constraint
 {
-    return Psr7Assertions::bodyMatchesForm($constraints);
+    return Psr7AssertionsClass::bodyMatchesForm($constraints);
 }
 
 function isAbsoluteUri(): Constraint

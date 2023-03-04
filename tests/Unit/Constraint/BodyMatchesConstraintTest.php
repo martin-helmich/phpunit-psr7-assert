@@ -4,13 +4,13 @@ namespace Helmich\Psr7Assert\Tests\Unit\Constraint;
 
 use GuzzleHttp\Psr7\Request;
 use Helmich\Psr7Assert\Constraint\BodyMatchesConstraint;
+use Mockery;
 use PHPUnit\Framework\Constraint\Constraint;
 use PHPUnit\Framework\TestCase;
 
 class BodyMatchesConstraintTest extends TestCase
 {
-
-    public function dataForBadTypes()
+    public static function dataForBadTypes()
     {
         return [
             ['foo'],
@@ -25,13 +25,13 @@ class BodyMatchesConstraintTest extends TestCase
      */
     public function testMatchFailsOnWrongType($var)
     {
-        $inner = $this->prophesize(Constraint::class);
+        $inner = Mockery::mock(Constraint::class);
 
-        $constraint = new BodyMatchesConstraint($inner->reveal());
+        $constraint = new BodyMatchesConstraint($inner);
         self::assertThat($constraint->evaluate($var, '', true), self::isFalse());
     }
 
-    public function dataForInnerConstraintIsEvaluatedWithMessageContent()
+    public static function dataForInnerConstraintIsEvaluatedWithMessageContent()
     {
         return [
             [uniqid(), true],
@@ -50,10 +50,13 @@ class BodyMatchesConstraintTest extends TestCase
     {
         $request = new Request('POST', '/', [], $body);
 
-        $inner = $this->prophesize(Constraint::class);
-        $inner->evaluate($body, '', true)->shouldBeCalled()->willReturn($matches);
+        $inner = Mockery::mock(Constraint::class, function ($mock) use ($body, $matches) {
+            $mock->shouldReceive('evaluate')
+                ->with($body, '', true)
+                ->andReturn($matches);
+        });
 
-        $constraint = new BodyMatchesConstraint($inner->reveal());
+        $constraint = new BodyMatchesConstraint($inner);
         self::assertThat($constraint->evaluate($request, '', true), self::equalTo($matches));
     }
 
