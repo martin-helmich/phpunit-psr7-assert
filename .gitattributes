@@ -1,0 +1,10 @@
+* text=auto eol=lf
+
+.codeclimate.yml export-ignore
+.gitattributes export-ignore
+.github/ export-ignore
+.gitignore export-ignore
+.travis.yml export-ignore
+phpunit.xml export-ignore
+README.md export-ignore
+tests/ export-ignore
