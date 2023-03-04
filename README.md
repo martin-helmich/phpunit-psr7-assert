@@ -28,7 +28,7 @@ easy overview:
 | ----------------------- | --------- | --------- | --------- | --------- | --------- | --------- | ---------- |
 | v1 (branch `v1`), **unsupported** | :white_check_mark: | :white_check_mark: | :no_entry_sign: | :no_entry_sign: | :no_entry_sign: | :no_entry_sign: | :no_entry_sign: |
 | v2 (branch `v2`), **unsupported** | :no_entry_sign: | :no_entry_sign: | :white_check_mark: | :no_entry_sign: | :no_entry_sign: | :no_entry_sign: | :no_entry_sign: |
-| v3 (branch `v3`) | :no_entry_sign: | :no_entry_sign: | :no_entry_sign: | :white_check_mark: | :no_entry_sign: | :no_entry_sign: | :no_entry_sign: |
+| v3 (branch `v3`), **unsupported** | :no_entry_sign: | :no_entry_sign: | :no_entry_sign: | :white_check_mark: | :no_entry_sign: | :no_entry_sign: | :no_entry_sign: |
 | v4 (branch `master`) | :no_entry_sign: | :no_entry_sign: | :no_entry_sign: | :no_entry_sign: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 
 When you are using `composer require` and have already declared a dependency to
