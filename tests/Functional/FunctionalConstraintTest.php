@@ -90,7 +90,7 @@ class FunctionalConstraintTest extends TestCase
         self::assertThat($request, bodyMatchesJson(['$.foo' => 'bar']));
     }
 
-    public function dataForRequestMethods()
+    public static function dataForRequestMethods()
     {
         return [
             ['GET'],
@@ -160,7 +160,7 @@ class FunctionalConstraintTest extends TestCase
         self::assertThat(new Request('POST', '/'), isDelete());
     }
 
-    public function dataForStatusCodes()
+    public static function dataForStatusCodes()
     {
         return [
             [200],

@@ -193,10 +193,7 @@ trait Psr7Assertions
             $headerConstraints[] = new HasHeaderConstraint($name, $constraint);
         }
 
-        $conjunction = Assert::logicalAnd();
-        $conjunction->setConstraints($headerConstraints);
-
-        return $conjunction;
+        return Assert::logicalAnd(...$headerConstraints);
     }
 
     public static function hasHeaderEqualTo(string $name, string $expected): Constraint
