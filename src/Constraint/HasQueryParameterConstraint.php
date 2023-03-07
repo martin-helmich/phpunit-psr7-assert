@@ -50,7 +50,7 @@ class HasQueryParameterConstraint extends Constraint
 
     private function matchesQueryString(string $query): bool
     {
-        return $this->inner->evaluate($query, "", true);
+        return (bool)$this->inner->evaluate($query, "", true);
     }
 
 

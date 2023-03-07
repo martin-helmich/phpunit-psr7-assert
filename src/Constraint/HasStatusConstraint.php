@@ -36,7 +36,7 @@ class HasStatusConstraint extends Constraint
             return false;
         }
 
-        return $this->status->evaluate($other->getStatusCode(), '', true);
+        return (bool)$this->status->evaluate($other->getStatusCode(), '', true);
     }
 
     protected function additionalFailureDescription($other): string

@@ -34,6 +34,6 @@ class BodyMatchesConstraint extends Constraint
 
         $other->getBody()->rewind();
         $body = $other->getBody()->getContents();
-        return $this->constraint->evaluate($body, '', true);
+        return (bool)$this->constraint->evaluate($body, '', true);
     }
 }
