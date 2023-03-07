@@ -6,7 +6,7 @@ use PHPUnit\Framework\Constraint\Constraint;
 class HasQueryParametersConstraint extends Constraint
 {
     /** @var HasQueryParameterConstraint[] */
-    private $constraints = [];
+    private array $constraints = [];
 
     public function __construct(array $constraints)
     {

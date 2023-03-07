@@ -9,10 +9,9 @@ use Psr\Http\Message\ResponseInterface;
 class HasStatusConstraint extends Constraint
 {
 
-    /** @var Constraint */
-    private $status;
+    private Constraint $status;
 
-    public function __construct($status)
+    public function __construct(mixed $status)
     {
         if (!$status instanceof Constraint) {
             $status = Assert::equalTo($status);

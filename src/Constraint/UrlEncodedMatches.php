@@ -7,10 +7,10 @@ use PHPUnit\Framework\Constraint\IsEqual;
 
 class UrlEncodedMatches extends Constraint
 {
-    private $nameMatcher;
-    private $valueMatcher;
+    private mixed $nameMatcher;
+    private mixed $valueMatcher;
 
-    public function __construct($nameMatcher, $valueMatcher = null)
+    public function __construct(mixed $nameMatcher, mixed $valueMatcher = null)
     {
         if (!($nameMatcher instanceof Constraint)) {
             $nameMatcher = new IsEqual($nameMatcher);

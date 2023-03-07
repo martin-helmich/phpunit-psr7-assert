@@ -38,7 +38,7 @@ trait Psr7Assertions
         Assert::assertThat($message, static::hasHeaders($constraints));
     }
 
-    public static function assertMessageBodyMatches(MessageInterface $message, $constraint): void
+    public static function assertMessageBodyMatches(MessageInterface $message, mixed $constraint): void
     {
         Assert::assertThat($message, static::bodyMatches($constraint));
     }
@@ -103,25 +103,17 @@ trait Psr7Assertions
         Assert::assertThat($request, static::isDelete());
     }
 
-    /**
-     * @param string $uri
-     */
     public static function assertStringIsAbsoluteUri(string $uri): void
     {
         Assert::assertThat($uri, static::isAbsoluteUri());
     }
 
-    /**
-     * @param string|UriInterface|RequestInterface $uriOrRequest
-     * @param string|Constraint                    $name
-     * @param string|Constraint|null               $value
-     */
-    public static function assertHasQueryParameter($uriOrRequest, $name, $value = null): void
+    public static function assertHasQueryParameter(string|UriInterface|RequestInterface $uriOrRequest, string|Constraint $name, string|Constraint|null $value = null): void
     {
         Assert::assertThat($uriOrRequest, static::hasQueryParameter($name, $value));
     }
 
-    public static function assertHasQueryParameters($uriOrRequest, array $parameters): void
+    public static function assertHasQueryParameters(string|UriInterface|RequestInterface $uriOrRequest, array $parameters): void
     {
         Assert::assertThat($uriOrRequest, static::hasQueryParameters($parameters));
     }
@@ -181,7 +173,7 @@ trait Psr7Assertions
         return static::hasMethod('DELETE');
     }
 
-    public static function hasHeader(string $name, $constraint = null): Constraint
+    public static function hasHeader(string $name, mixed $constraint = null): Constraint
     {
         return new HasHeaderConstraint($name, $constraint);
     }
@@ -206,12 +198,7 @@ trait Psr7Assertions
         return new BodyMatchesConstraint($constraint);
     }
 
-    /**
-     * @param string|Constraint      $name
-     * @param string|Constraint|null $value
-     * @return Constraint
-     */
-    public static function hasQueryParameter($name, $value = null): Constraint
+    public static function hasQueryParameter(string|Constraint $name, string|Constraint|null $value = null): Constraint
     {
         return new HasQueryParameterConstraint($name, $value);
     }
@@ -242,9 +229,6 @@ trait Psr7Assertions
         );
     }
 
-    /**
-     * @return Constraint
-     */
     public static function isAbsoluteUri(): Constraint
     {
         return new IsAbsoluteUriConstraint();

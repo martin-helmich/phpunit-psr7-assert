@@ -6,7 +6,7 @@ use PHPUnit\Framework\Constraint\Constraint;
 class UrlEncodedMatchesMany extends Constraint
 {
     /** @var UrlEncodedMatches[] */
-    private $constraints = [];
+    private array $constraints = [];
 
     public function __construct(array $constraints)
     {

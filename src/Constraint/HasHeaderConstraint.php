@@ -9,13 +9,10 @@ use Psr\Http\Message\MessageInterface;
 class HasHeaderConstraint extends Constraint
 {
 
-    /** @var string */
-    private $name;
+    private string $name;
+    private Constraint $constraint;
 
-    /** @var Constraint */
-    private $constraint;
-
-    public function __construct(string $name, $constraint = null)
+    public function __construct(string $name, mixed $constraint = null)
     {
         if ($constraint === null) {
             $constraint = Assert::logicalNot(Assert::isEmpty());

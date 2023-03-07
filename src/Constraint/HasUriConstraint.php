@@ -8,8 +8,7 @@ use Psr\Http\Message\RequestInterface;
 class HasUriConstraint extends Constraint
 {
 
-    /** @var string */
-    private $uri;
+    private string $uri;
 
     public function __construct(string $uri)
     {

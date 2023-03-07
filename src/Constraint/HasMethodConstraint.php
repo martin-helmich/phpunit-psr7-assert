@@ -8,8 +8,7 @@ use Psr\Http\Message\RequestInterface;
 class HasMethodConstraint extends Constraint
 {
 
-    /** @var string */
-    private $method;
+    private string $method;
 
     public function __construct(string $method)
     {

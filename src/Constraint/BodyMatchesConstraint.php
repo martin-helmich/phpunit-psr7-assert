@@ -9,7 +9,7 @@ class BodyMatchesConstraint extends Constraint
 {
 
     /** @var Constraint */
-    private $constraint;
+    private Constraint $constraint;
 
     public function __construct(Constraint $constraint)
     {
