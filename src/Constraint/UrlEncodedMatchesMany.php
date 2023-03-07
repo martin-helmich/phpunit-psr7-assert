@@ -29,7 +29,7 @@ class UrlEncodedMatchesMany extends Constraint
 
     public function toString(): string
     {
-        return join(" and ", array_map(function(HasQueryParameterConstraint $c) {
+        return join(" and ", array_map(function(UrlEncodedMatches $c) {
             return $c->toString();
         }, $this->constraints));
     }
