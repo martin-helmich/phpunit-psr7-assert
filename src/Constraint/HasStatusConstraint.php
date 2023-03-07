@@ -27,6 +27,7 @@ class HasStatusConstraint extends Constraint
      */
     public function toString(): string
     {
+        /** @psalm-suppress InternalMethod */
         return "response status {$this->status->toString()}";
     }
 

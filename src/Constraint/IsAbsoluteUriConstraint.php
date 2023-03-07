@@ -26,6 +26,6 @@ class IsAbsoluteUriConstraint extends Constraint
             return false;
         }
 
-        return $parts !== false;
+        return true;
     }
 }

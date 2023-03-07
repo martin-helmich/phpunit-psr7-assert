@@ -23,6 +23,7 @@ class BodyMatchesConstraint extends Constraint
      */
     public function toString(): string
     {
+        /** @psalm-suppress InternalMethod */
         return 'message body matches ' . $this->constraint->toString();
     }
 

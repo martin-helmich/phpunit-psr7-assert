@@ -31,6 +31,7 @@ class HasHeaderConstraint extends Constraint
      */
     public function toString(): string
     {
+        /** @psalm-suppress InternalMethod */
         return "has header '{$this->name}' that {$this->constraint->toString()}";
     }
 
