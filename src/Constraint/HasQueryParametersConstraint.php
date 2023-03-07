@@ -15,7 +15,7 @@ class HasQueryParametersConstraint extends Constraint
         }
     }
 
-    public function matches($other): bool
+    public function matches(mixed $other): bool
     {
         foreach ($this->constraints as $constraint) {
             if (!$constraint->evaluate($other, "", true)) {

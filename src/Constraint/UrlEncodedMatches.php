@@ -26,7 +26,7 @@ class UrlEncodedMatches extends Constraint
         $this->valueMatcher = $valueMatcher;
     }
 
-    protected function matches($other): bool
+    protected function matches(mixed $other): bool
     {
         parse_str($other, $parsedQuery);
 

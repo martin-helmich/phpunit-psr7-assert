@@ -25,7 +25,7 @@ class HasMethodConstraint extends Constraint
         return "has request method {$this->method}";
     }
 
-    protected function matches($other): bool
+    protected function matches(mixed $other): bool
     {
         if (!$other instanceof RequestInterface) {
             return false;

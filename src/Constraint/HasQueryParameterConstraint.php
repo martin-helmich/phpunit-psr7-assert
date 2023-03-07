@@ -15,7 +15,7 @@ class HasQueryParameterConstraint extends Constraint
         $this->inner = new UrlEncodedMatches($nameMatcher, $valueMatcher);
     }
 
-    protected function matches($other): bool
+    protected function matches(mixed $other): bool
     {
         if (is_string($other)) {
             return $this->matchesString($other);

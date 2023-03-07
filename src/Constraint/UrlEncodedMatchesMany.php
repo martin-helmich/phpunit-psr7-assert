@@ -15,7 +15,7 @@ class UrlEncodedMatchesMany extends Constraint
         }
     }
 
-    protected function matches($other): bool
+    protected function matches(mixed $other): bool
     {
         foreach ($this->constraints as $constraint) {
             if (!$constraint->evaluate($other, "", true)) {

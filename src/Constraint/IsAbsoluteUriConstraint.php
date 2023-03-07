@@ -11,7 +11,7 @@ class IsAbsoluteUriConstraint extends Constraint
         return "is valid URI";
     }
 
-    protected function matches($other): bool
+    protected function matches(mixed $other): bool
     {
         $parts = parse_url($other);
         if ($parts === false) {

@@ -12,7 +12,7 @@ class HasHeaderConstraint extends Constraint
     private string $name;
     private Constraint $constraint;
 
-    public function __construct(string $name, mixed $constraint = null)
+    public function __construct(string $name, Constraint|string $constraint = null)
     {
         if ($constraint === null) {
             $constraint = Assert::logicalNot(Assert::isEmpty());
@@ -35,7 +35,7 @@ class HasHeaderConstraint extends Constraint
         return "has header '{$this->name}' that {$this->constraint->toString()}";
     }
 
-    protected function matches($other): bool
+    protected function matches(mixed $other): bool
     {
         if (!$other instanceof MessageInterface) {
             return false;

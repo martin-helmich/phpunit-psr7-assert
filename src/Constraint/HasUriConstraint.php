@@ -25,7 +25,7 @@ class HasUriConstraint extends Constraint
         return "has request URI '{$this->uri}'";
     }
 
-    protected function matches($other): bool
+    protected function matches(mixed $other): bool
     {
         if (!$other instanceof RequestInterface) {
             return false;

@@ -15,7 +15,7 @@ function hasUri(string $uri): HasUriConstraint
     return new HasUriConstraint($uri);
 }
 
-function hasHeader(string $name, $constraint = null): HasHeaderConstraint
+function hasHeader(string $name, Constraint|string $constraint = null): HasHeaderConstraint
 {
     return new HasHeaderConstraint($name, $constraint);
 }
@@ -25,12 +25,12 @@ function hasHeaders(array $constraints): Constraint
     return Psr7AssertionsClass::hasHeaders($constraints);
 }
 
-function hasStatus($status): Constraint
+function hasStatus(Constraint|int $status): Constraint
 {
     return Psr7AssertionsClass::hasStatus($status);
 }
 
-function hasQueryParameter($name, $value = null): Constraint
+function hasQueryParameter(Constraint|string $name, Constraint|string $value = null): Constraint
 {
     return Psr7AssertionsClass::hasQueryParameter($name, $value);
 }
@@ -93,12 +93,12 @@ function isDelete(): Constraint
     return Psr7AssertionsClass::isDelete();
 }
 
-function bodyMatches($constraint): Constraint
+function bodyMatches(Constraint $constraint): Constraint
 {
     return new BodyMatchesConstraint($constraint);
 }
 
-function bodyMatchesJson($constraints): Constraint
+function bodyMatchesJson(array $constraints): Constraint
 {
     return Assert::logicalAnd(
         hasContentType('application/json'),

@@ -28,7 +28,7 @@ trait Psr7Assertions
         Assert::assertThat($request, static::hasUri($uri));
     }
 
-    public static function assertMessageHasHeader(MessageInterface $message, string $headerName, $headerValue = null): void
+    public static function assertMessageHasHeader(MessageInterface $message, string $headerName, mixed $headerValue = null): void
     {
         Assert::assertThat($message, static::hasHeader($headerName, $headerValue));
     }
@@ -128,7 +128,7 @@ trait Psr7Assertions
         return new HasMethodConstraint($method);
     }
 
-    public static function hasStatus($status): Constraint
+    public static function hasStatus(Constraint|int $status): Constraint
     {
         return new HasStatusConstraint($status);
     }
