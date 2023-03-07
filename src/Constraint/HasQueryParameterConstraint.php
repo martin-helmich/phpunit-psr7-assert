@@ -10,7 +10,7 @@ class HasQueryParameterConstraint extends Constraint
 {
     private UrlEncodedMatches $inner;
 
-    public function __construct(mixed $nameMatcher, mixed $valueMatcher = null)
+    public function __construct(Constraint|string $nameMatcher, Constraint|string|null $valueMatcher = null)
     {
         $this->inner = new UrlEncodedMatches($nameMatcher, $valueMatcher);
     }

@@ -8,6 +8,9 @@ class HasQueryParametersConstraint extends Constraint
     /** @var HasQueryParameterConstraint[] */
     private array $constraints = [];
 
+    /**
+     * @param array<string, HasQueryParameterConstraint> $constraints
+     */
     public function __construct(array $constraints)
     {
         foreach ($constraints as $key => $value) {

@@ -13,6 +13,10 @@ class IsAbsoluteUriConstraint extends Constraint
 
     protected function matches(mixed $other): bool
     {
+        if (!is_string($other)) {
+            return false;
+        }
+
         $parts = parse_url($other);
         if ($parts === false) {
             return false;

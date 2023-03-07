@@ -4,6 +4,7 @@ declare(strict_types=1);
 use Helmich\JsonAssert\Constraint\JsonValueMatchesMany;
 use Helmich\Psr7Assert\Constraint\BodyMatchesConstraint;
 use Helmich\Psr7Assert\Constraint\HasHeaderConstraint;
+use Helmich\Psr7Assert\Constraint\HasQueryParameterConstraint;
 use Helmich\Psr7Assert\Constraint\HasUriConstraint;
 use Helmich\Psr7Assert\Constraint\IsAbsoluteUriConstraint;
 use Helmich\Psr7Assert\Psr7AssertionsClass;
@@ -15,11 +16,15 @@ function hasUri(string $uri): HasUriConstraint
     return new HasUriConstraint($uri);
 }
 
-function hasHeader(string $name, Constraint|string $constraint = null): HasHeaderConstraint
+function hasHeader(string $name, Constraint|string|int $constraint = null): HasHeaderConstraint
 {
     return new HasHeaderConstraint($name, $constraint);
 }
 
+/**
+ * @param array<string, Constraint|string> $constraints
+ * @return Constraint
+ */
 function hasHeaders(array $constraints): Constraint
 {
     return Psr7AssertionsClass::hasHeaders($constraints);
@@ -35,6 +40,10 @@ function hasQueryParameter(Constraint|string $name, Constraint|string $value = n
     return Psr7AssertionsClass::hasQueryParameter($name, $value);
 }
 
+/**
+ * @param array<string, HasQueryParameterConstraint> $constraints
+ * @return Constraint
+ */
 function hasQueryParameters(array $constraints): Constraint
 {
     return Psr7AssertionsClass::hasQueryParameters($constraints);
@@ -111,6 +120,10 @@ function bodyMatchesJson(array $constraints): Constraint
     );
 }
 
+/**
+ * @param array<string, Constraint|string|null> $constraints
+ * @return Constraint
+ */
 function bodyMatchesForm(array $constraints): Constraint
 {
     return Psr7AssertionsClass::bodyMatchesForm($constraints);

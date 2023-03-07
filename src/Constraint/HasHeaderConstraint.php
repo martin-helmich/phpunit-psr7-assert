@@ -12,7 +12,7 @@ class HasHeaderConstraint extends Constraint
     private string $name;
     private Constraint $constraint;
 
-    public function __construct(string $name, Constraint|string $constraint = null)
+    public function __construct(string $name, Constraint|string|int $constraint = null)
     {
         if ($constraint === null) {
             $constraint = Assert::logicalNot(Assert::isEmpty());

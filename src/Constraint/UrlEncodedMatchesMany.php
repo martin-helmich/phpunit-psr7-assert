@@ -8,6 +8,9 @@ class UrlEncodedMatchesMany extends Constraint
     /** @var UrlEncodedMatches[] */
     private array $constraints = [];
 
+    /**
+     * @param array<string, Constraint|string|null> $constraints
+     */
     public function __construct(array $constraints)
     {
         foreach ($constraints as $key => $value) {
