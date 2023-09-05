@@ -8,8 +8,7 @@ use Psr\Http\Message\RequestInterface;
 class HasUriConstraint extends Constraint
 {
 
-    /** @var string */
-    private $uri;
+    private string $uri;
 
     public function __construct(string $uri)
     {
@@ -26,7 +25,7 @@ class HasUriConstraint extends Constraint
         return "has request URI '{$this->uri}'";
     }
 
-    protected function matches($other): bool
+    protected function matches(mixed $other): bool
     {
         if (!$other instanceof RequestInterface) {
             return false;

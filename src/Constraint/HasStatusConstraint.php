@@ -9,10 +9,9 @@ use Psr\Http\Message\ResponseInterface;
 class HasStatusConstraint extends Constraint
 {
 
-    /** @var Constraint */
-    private $status;
+    private Constraint $status;
 
-    public function __construct($status)
+    public function __construct(mixed $status)
     {
         if (!$status instanceof Constraint) {
             $status = Assert::equalTo($status);
@@ -28,19 +27,20 @@ class HasStatusConstraint extends Constraint
      */
     public function toString(): string
     {
+        /** @psalm-suppress InternalMethod */
         return "response status {$this->status->toString()}";
     }
 
-    protected function matches($other): bool
+    protected function matches(mixed $other): bool
     {
         if (!$other instanceof ResponseInterface) {
             return false;
         }
 
-        return $this->status->evaluate($other->getStatusCode(), '', true);
+        return (bool)$this->status->evaluate($other->getStatusCode(), '', true);
     }
 
-    protected function additionalFailureDescription($other): string
+    protected function additionalFailureDescription(mixed $other): string
     {
         if ($other instanceof ResponseInterface) {
             return 'Actual status is ' . $other->getStatusCode() . ' and the body contains: ' . $other->getBody();

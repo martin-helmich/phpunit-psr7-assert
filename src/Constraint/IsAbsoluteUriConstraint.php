@@ -11,8 +11,12 @@ class IsAbsoluteUriConstraint extends Constraint
         return "is valid URI";
     }
 
-    protected function matches($other): bool
+    protected function matches(mixed $other): bool
     {
+        if (!is_string($other)) {
+            return false;
+        }
+
         $parts = parse_url($other);
         if ($parts === false) {
             return false;
@@ -26,6 +30,6 @@ class IsAbsoluteUriConstraint extends Constraint
             return false;
         }
 
-        return $parts !== false;
+        return true;
     }
 }

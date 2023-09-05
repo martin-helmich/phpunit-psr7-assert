@@ -6,8 +6,11 @@ use PHPUnit\Framework\Constraint\Constraint;
 class UrlEncodedMatchesMany extends Constraint
 {
     /** @var UrlEncodedMatches[] */
-    private $constraints = [];
+    private array $constraints = [];
 
+    /**
+     * @param array<string, Constraint|string|null> $constraints
+     */
     public function __construct(array $constraints)
     {
         foreach ($constraints as $key => $value) {
@@ -15,7 +18,7 @@ class UrlEncodedMatchesMany extends Constraint
         }
     }
 
-    protected function matches($other): bool
+    protected function matches(mixed $other): bool
     {
         foreach ($this->constraints as $constraint) {
             if (!$constraint->evaluate($other, "", true)) {
@@ -29,7 +32,7 @@ class UrlEncodedMatchesMany extends Constraint
 
     public function toString(): string
     {
-        return join(" and ", array_map(function(HasQueryParameterConstraint $c) {
+        return join(" and ", array_map(function(UrlEncodedMatches $c) {
             return $c->toString();
         }, $this->constraints));
     }

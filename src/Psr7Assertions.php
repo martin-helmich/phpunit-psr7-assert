@@ -28,17 +28,22 @@ trait Psr7Assertions
         Assert::assertThat($request, static::hasUri($uri));
     }
 
-    public static function assertMessageHasHeader(MessageInterface $message, string $headerName, $headerValue = null): void
+    public static function assertMessageHasHeader(MessageInterface $message, string $headerName, Constraint|string $headerValue = null): void
     {
         Assert::assertThat($message, static::hasHeader($headerName, $headerValue));
     }
 
+    /**
+     * @param MessageInterface $message
+     * @param array<string, Constraint|string> $constraints
+     * @return void
+     */
     public static function assertMessageHasHeaders(MessageInterface $message, array $constraints): void
     {
         Assert::assertThat($message, static::hasHeaders($constraints));
     }
 
-    public static function assertMessageBodyMatches(MessageInterface $message, $constraint): void
+    public static function assertMessageBodyMatches(MessageInterface $message, Constraint $constraint): void
     {
         Assert::assertThat($message, static::bodyMatches($constraint));
     }
@@ -48,6 +53,11 @@ trait Psr7Assertions
         Assert::assertThat($message, static::bodyMatchesJson($jsonConstraints));
     }
 
+    /**
+     * @param MessageInterface $message
+     * @param array<string, Constraint|string|null> $formConstraints
+     * @return void
+     */
     public static function assertMessageBodyMatchesForm(MessageInterface $message, array $formConstraints): void
     {
         Assert::assertThat($message, static::bodyMatchesForm($formConstraints));
@@ -103,25 +113,22 @@ trait Psr7Assertions
         Assert::assertThat($request, static::isDelete());
     }
 
-    /**
-     * @param string $uri
-     */
     public static function assertStringIsAbsoluteUri(string $uri): void
     {
         Assert::assertThat($uri, static::isAbsoluteUri());
     }
 
-    /**
-     * @param string|UriInterface|RequestInterface $uriOrRequest
-     * @param string|Constraint                    $name
-     * @param string|Constraint|null               $value
-     */
-    public static function assertHasQueryParameter($uriOrRequest, $name, $value = null): void
+    public static function assertHasQueryParameter(string|UriInterface|RequestInterface $uriOrRequest, string|Constraint $name, string|Constraint|null $value = null): void
     {
         Assert::assertThat($uriOrRequest, static::hasQueryParameter($name, $value));
     }
 
-    public static function assertHasQueryParameters($uriOrRequest, array $parameters): void
+    /**
+     * @param string|UriInterface|RequestInterface $uriOrRequest
+     * @param array<string, HasQueryParameterConstraint> $parameters
+     * @return void
+     */
+    public static function assertHasQueryParameters(string|UriInterface|RequestInterface $uriOrRequest, array $parameters): void
     {
         Assert::assertThat($uriOrRequest, static::hasQueryParameters($parameters));
     }
@@ -136,7 +143,7 @@ trait Psr7Assertions
         return new HasMethodConstraint($method);
     }
 
-    public static function hasStatus($status): Constraint
+    public static function hasStatus(Constraint|int $status): Constraint
     {
         return new HasStatusConstraint($status);
     }
@@ -181,11 +188,15 @@ trait Psr7Assertions
         return static::hasMethod('DELETE');
     }
 
-    public static function hasHeader(string $name, $constraint = null): Constraint
+    public static function hasHeader(string $name, Constraint|string|int $constraint = null): Constraint
     {
         return new HasHeaderConstraint($name, $constraint);
     }
 
+    /**
+     * @param array<string, Constraint|string> $constraints
+     * @return Constraint
+     */
     public static function hasHeaders(array $constraints): Constraint
     {
         $headerConstraints = [];
@@ -206,16 +217,15 @@ trait Psr7Assertions
         return new BodyMatchesConstraint($constraint);
     }
 
-    /**
-     * @param string|Constraint      $name
-     * @param string|Constraint|null $value
-     * @return Constraint
-     */
-    public static function hasQueryParameter($name, $value = null): Constraint
+    public static function hasQueryParameter(string|Constraint $name, string|Constraint|null $value = null): Constraint
     {
         return new HasQueryParameterConstraint($name, $value);
     }
 
+    /**
+     * @param array<string, HasQueryParameterConstraint> $parameters
+     * @return Constraint
+     */
     public static function hasQueryParameters(array $parameters): Constraint
     {
         return new HasQueryParametersConstraint($parameters);
@@ -234,6 +244,10 @@ trait Psr7Assertions
         );
     }
 
+    /**
+     * @param array<string, Constraint|string|null> $constraints
+     * @return Constraint
+     */
     public static function bodyMatchesForm(array $constraints): Constraint
     {
         return Assert::logicalAnd(
@@ -242,9 +256,6 @@ trait Psr7Assertions
         );
     }
 
-    /**
-     * @return Constraint
-     */
     public static function isAbsoluteUri(): Constraint
     {
         return new IsAbsoluteUriConstraint();

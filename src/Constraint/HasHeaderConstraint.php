@@ -9,13 +9,10 @@ use Psr\Http\Message\MessageInterface;
 class HasHeaderConstraint extends Constraint
 {
 
-    /** @var string */
-    private $name;
+    private string $name;
+    private Constraint $constraint;
 
-    /** @var Constraint */
-    private $constraint;
-
-    public function __construct(string $name, $constraint = null)
+    public function __construct(string $name, Constraint|string|int $constraint = null)
     {
         if ($constraint === null) {
             $constraint = Assert::logicalNot(Assert::isEmpty());
@@ -34,10 +31,11 @@ class HasHeaderConstraint extends Constraint
      */
     public function toString(): string
     {
+        /** @psalm-suppress InternalMethod */
         return "has header '{$this->name}' that {$this->constraint->toString()}";
     }
 
-    protected function matches($other): bool
+    protected function matches(mixed $other): bool
     {
         if (!$other instanceof MessageInterface) {
             return false;
