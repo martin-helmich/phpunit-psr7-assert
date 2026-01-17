@@ -28,7 +28,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Helmich\\Psr7Assert\\Tests": "tests/"
+            "Helmich\\Psr7Assert\\Tests\\": "tests/"
         },
         "files": [
             "vendor/helmich/phpunit-json-assert/src/Functions.php",
