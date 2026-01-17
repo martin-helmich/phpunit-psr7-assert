@@ -7,6 +7,7 @@ use GuzzleHttp\Psr7\Response;
 use Helmich\Psr7Assert\Psr7Assertions;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\AssertionFailedError;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class ConstraintTest extends TestCase
@@ -102,7 +103,7 @@ class ConstraintTest extends TestCase
         $this->assertMessageBodyMatchesJson($request, array('$.foo' => 'bar'));
     }
 
-    public static function dataForRequestMethods()
+    public static function dataForRequestMethods(): array
     {
         return [
             ['GET'],
@@ -115,10 +116,20 @@ class ConstraintTest extends TestCase
         ];
     }
 
+    public static function dataForStatusCodes(): array
+    {
+        return [
+            [200],
+            [400],
+            [404],
+            [500],
+        ];
+    }
+
     /**
-     * @param $method
      * @dataProvider dataForRequestMethods
      */
+    #[DataProvider('dataForRequestMethods')]
     public function testAssertRequestHasMethodCanSucceed($method)
     {
         $this->assertRequestHasMethod(new Request($method, '/'), $method);
@@ -172,19 +183,10 @@ class ConstraintTest extends TestCase
         $this->assertRequestIsDelete(new Request('POST', '/'));
     }
 
-    public static function dataForStatusCodes()
-    {
-        return [
-            [200],
-            [400],
-            [404],
-            [500],
-        ];
-    }
-
     /**
      * @dataProvider dataForStatusCodes
      */
+    #[DataProvider('dataForStatusCodes')]
     public function testHasStatusCanSucceed($status)
     {
         $this->assertResponseHasStatus(new Response($status), $status);
@@ -229,7 +231,6 @@ class ConstraintTest extends TestCase
     public function testIsClientErrorCanFail()
     {
         $this->expectException(AssertionFailedError::class);
-
         $this->assertResponseIsClientError(new Response(200));
     }
 
@@ -241,8 +242,6 @@ class ConstraintTest extends TestCase
     public function testIsServerErrorCanFail()
     {
         $this->expectException(AssertionFailedError::class);
-
         $this->assertResponseIsServerError(new Response(200));
     }
-
 }

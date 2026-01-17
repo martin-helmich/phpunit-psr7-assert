@@ -5,12 +5,13 @@ namespace Helmich\Psr7Assert\Tests\Unit\Constraint;
 use GuzzleHttp\Psr7\Request;
 use Helmich\Psr7Assert\Constraint\HasHeaderConstraint;
 use PHPUnit\Framework\AssertionFailedError;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class HasHeaderConstraintTest extends TestCase
 {
 
-    public static function dataForHeaderValues()
+    public static function dataForHeaderValues(): array
     {
         return [
             ['foo'],
@@ -19,9 +20,9 @@ class HasHeaderConstraintTest extends TestCase
     }
 
     /**
-     * @param $header
      * @dataProvider dataForHeaderValues
      */
+    #[DataProvider('dataForHeaderValues')]
     public function testDefaultConstraintMatchesWhenHeaderIsNotEmpty($header)
     {
         $request = new Request('POST', '/', ['x-foo' => $header]);
@@ -51,9 +52,9 @@ class HasHeaderConstraintTest extends TestCase
     }
 
     /**
-     * @param $header
      * @dataProvider dataForHeaderValues
      */
+    #[DataProvider('dataForHeaderValues')]
     public function testPrimitiveConstraintMatchesOnEquality($header)
     {
         $request = new Request('POST', '/', ['x-foo' => $header]);

@@ -3,6 +3,7 @@ declare(strict_types=1);
 namespace Helmich\Psr7Assert\Tests\Unit\Constraint;
 
 use Helmich\Psr7Assert\Constraint\IsAbsoluteUriConstraint;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class IsAbsoluteUriConstraintTest extends TestCase
@@ -30,8 +31,8 @@ class IsAbsoluteUriConstraintTest extends TestCase
 
     /**
      * @dataProvider validUrls
-     * @param $validUrl
      */
+    #[DataProvider('validUrls')]
     public function testValidUrlMatches($validUrl)
     {
         $constraint = new IsAbsoluteUriConstraint();
@@ -40,8 +41,8 @@ class IsAbsoluteUriConstraintTest extends TestCase
 
     /**
      * @dataProvider invalidUrls
-     * @param $invalidUrl
      */
+    #[DataProvider('invalidUrls')]
     public function testInvalidUrlDoesNotMatch($invalidUrl)
     {
         $constraint = new IsAbsoluteUriConstraint();

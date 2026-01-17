@@ -6,6 +6,7 @@ use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\AssertionFailedError;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class FunctionalConstraintTest extends TestCase
@@ -90,7 +91,7 @@ class FunctionalConstraintTest extends TestCase
         self::assertThat($request, bodyMatchesJson(['$.foo' => 'bar']));
     }
 
-    public static function dataForRequestMethods()
+    public static function dataForRequestMethods(): array
     {
         return [
             ['GET'],
@@ -104,9 +105,9 @@ class FunctionalConstraintTest extends TestCase
     }
 
     /**
-     * @param $method
      * @dataProvider dataForRequestMethods
      */
+    #[DataProvider('dataForRequestMethods')]
     public function testAssertRequestHasMethodCanSucceed($method)
     {
         self::assertThat(new Request($method, '/'), hasMethod($method));
@@ -160,7 +161,7 @@ class FunctionalConstraintTest extends TestCase
         self::assertThat(new Request('POST', '/'), isDelete());
     }
 
-    public static function dataForStatusCodes()
+    public static function dataForStatusCodes(): array
     {
         return [
             [200],
@@ -173,6 +174,7 @@ class FunctionalConstraintTest extends TestCase
     /**
      * @dataProvider dataForStatusCodes
      */
+    #[DataProvider('dataForStatusCodes')]
     public function testHasStatusCanSucceed($status)
     {
         self::assertThat(new Response($status), hasStatus($status));
