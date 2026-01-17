@@ -5,12 +5,13 @@ namespace Helmich\Psr7Assert\Tests\Unit\Constraint;
 use GuzzleHttp\Psr7\Request;
 use Helmich\Psr7Assert\Constraint\BodyMatchesConstraint;
 use Mockery;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Constraint\Constraint;
 use PHPUnit\Framework\TestCase;
 
 class BodyMatchesConstraintTest extends TestCase
 {
-    public static function dataForBadTypes()
+    public static function dataForBadTypes(): array
     {
         return [
             ['foo'],
@@ -20,9 +21,9 @@ class BodyMatchesConstraintTest extends TestCase
     }
 
     /**
-     * @param $var
      * @dataProvider dataForBadTypes
      */
+    #[DataProvider('dataForBadTypes')]
     public function testMatchFailsOnWrongType($var)
     {
         $inner = Mockery::mock(Constraint::class);
@@ -42,10 +43,9 @@ class BodyMatchesConstraintTest extends TestCase
     }
 
     /**
-     * @param $body
-     * @param $matches
      * @dataProvider dataForInnerConstraintIsEvaluatedWithMessageContent
      */
+    #[DataProvider('dataForInnerConstraintIsEvaluatedWithMessageContent')]
     public function testInnerConstraintIsEvaluatedWithMessageContent($body, $matches)
     {
         $request = new Request('POST', '/', [], $body);

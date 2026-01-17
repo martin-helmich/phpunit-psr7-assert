@@ -8,15 +8,14 @@ use Psr\Http\Message\UriInterface;
 
 class HasQueryParameterConstraint extends Constraint
 {
-    /** @var UrlEncodedMatches */
-    private $inner;
+    private UrlEncodedMatches $inner;
 
-    public function __construct($nameMatcher, $valueMatcher = null)
+    public function __construct(Constraint|string $nameMatcher, Constraint|string|null $valueMatcher = null)
     {
         $this->inner = new UrlEncodedMatches($nameMatcher, $valueMatcher);
     }
 
-    protected function matches($other): bool
+    protected function matches(mixed $other): bool
     {
         if (is_string($other)) {
             return $this->matchesString($other);
