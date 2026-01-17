@@ -3,28 +3,30 @@ name: Code coverage
 on:
   push:
     branches:
+    pull_request:
 
 jobs:
   coverage:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v1
+      - uses: actions/checkout@v1
 
-    - name: Setup PHP
-      uses: shivammathur/setup-php@v2
-      with:
-        php-version: 8.1
-        extensions: mbstring, intl, json
-        coverage: pcov
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.4
+          extensions: mbstring, intl, json
+          coverage: pcov
 
-    - name: Install dependencies
-      run: composer install --prefer-dist --no-progress --no-suggest
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest
 
-    - name: Test & publish code coverage
-      uses: paambaati/codeclimate-action@v3.0.0
-      env:
-        CC_TEST_REPORTER_ID: ${{ secrets.codeClimateReporterID }}
-      with:
-        coverageCommand: ./vendor/bin/phpunit --coverage-clover=clover.xml
-        debug: true
+      - name: Run unit tests
+        run: ./vendor/bin/phpunit
+
+      - name: Upload coverage report
+        uses: qltysh/qlty-action/coverage@v2
+        with:
+          token: ${{ secrets.QLTY_COVERAGE_TOKEN }}
+          files: build/clover.xml

@@ -1,8 +1,8 @@
 # PSR-7 assertions for PHPUnit
 
 ![Unit tests](https://github.com/martin-helmich/phpunit-psr7-assert/workflows/Unit%20tests/badge.svg)
-[![Code Climate](https://codeclimate.com/github/martin-helmich/phpunit-psr7-assert/badges/gpa.svg)](https://codeclimate.com/github/martin-helmich/phpunit-psr7-assert)
-[![Test Coverage](https://codeclimate.com/github/martin-helmich/phpunit-psr7-assert/badges/coverage.svg)](https://codeclimate.com/github/martin-helmich/phpunit-psr7-assert/coverage)
+[![Maintainability](https://qlty.sh/gh/martin-helmich/projects/phpunit-psr7-assert/maintainability.svg)](https://qlty.sh/gh/martin-helmich/projects/phpunit-psr7-assert)
+[![Code Coverage](https://qlty.sh/gh/martin-helmich/projects/phpunit-psr7-assert/coverage.svg)](https://qlty.sh/gh/martin-helmich/projects/phpunit-psr7-assert)
 
 This library adds several new assertions to [PHPUnit](https://phpunit.de/)
 that allow you to easily and concisely test HTTP request and response
