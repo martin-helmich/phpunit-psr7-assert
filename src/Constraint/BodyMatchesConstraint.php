@@ -8,8 +8,7 @@ use Psr\Http\Message\MessageInterface;
 class BodyMatchesConstraint extends Constraint
 {
 
-    /** @var Constraint */
-    private $constraint;
+    private Constraint $constraint;
 
     public function __construct(Constraint $constraint)
     {
@@ -26,7 +25,7 @@ class BodyMatchesConstraint extends Constraint
         return 'message body matches ' . $this->constraint->toString();
     }
 
-    protected function matches($other): bool
+    protected function matches(mixed $other): bool
     {
         if (!$other instanceof MessageInterface) {
             return false;

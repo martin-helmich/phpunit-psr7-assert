@@ -136,7 +136,7 @@ trait Psr7Assertions
         return new HasMethodConstraint($method);
     }
 
-    public static function hasStatus($status): Constraint
+    public static function hasStatus(Constraint|int $status): Constraint
     {
         return new HasStatusConstraint($status);
     }
@@ -181,11 +181,14 @@ trait Psr7Assertions
         return static::hasMethod('DELETE');
     }
 
-    public static function hasHeader(string $name, $constraint = null): Constraint
+    public static function hasHeader(string $name, Constraint|string|int|null $constraint = null): Constraint
     {
         return new HasHeaderConstraint($name, $constraint);
     }
 
+    /**
+     * @param array<string, Constraint|string|int|null> $constraints
+     */
     public static function hasHeaders(array $constraints): Constraint
     {
         $headerConstraints = [];
@@ -196,7 +199,7 @@ trait Psr7Assertions
         return Assert::logicalAnd(...$headerConstraints);
     }
 
-    public static function hasHeaderEqualTo(string $name, string $expected): Constraint
+    public static function hasHeaderEqualTo(string $name, string|int $expected): Constraint
     {
         return new HasHeaderConstraint($name, new IsEqual($expected));
     }
@@ -206,21 +209,22 @@ trait Psr7Assertions
         return new BodyMatchesConstraint($constraint);
     }
 
-    /**
-     * @param string|Constraint      $name
-     * @param string|Constraint|null $value
-     * @return Constraint
-     */
-    public static function hasQueryParameter($name, $value = null): Constraint
+    public static function hasQueryParameter(Constraint|string $name, Constraint|string|null $value = null): Constraint
     {
         return new HasQueryParameterConstraint($name, $value);
     }
 
+    /**
+     * @param array<string, Constraint|string|null> $parameters
+     */
     public static function hasQueryParameters(array $parameters): Constraint
     {
         return new HasQueryParametersConstraint($parameters);
     }
 
+    /**
+     * @param array<string, mixed> $constraints
+     */
     public static function bodyMatchesJson(array $constraints): Constraint
     {
         return Assert::logicalAnd(
@@ -234,6 +238,9 @@ trait Psr7Assertions
         );
     }
 
+    /**
+     * @param array<string, mixed> $constraints
+     */
     public static function bodyMatchesForm(array $constraints): Constraint
     {
         return Assert::logicalAnd(
@@ -242,9 +249,6 @@ trait Psr7Assertions
         );
     }
 
-    /**
-     * @return Constraint
-     */
     public static function isAbsoluteUri(): Constraint
     {
         return new IsAbsoluteUriConstraint();
